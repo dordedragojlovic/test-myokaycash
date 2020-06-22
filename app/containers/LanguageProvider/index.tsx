@@ -24,6 +24,7 @@ const stateSelector = createSelector(makeSelectLocale(), locale => ({
 
 export default function LanguageProvider(props: Props) {
   const { locale } = useSelector(stateSelector);
+
   return (
     <IntlProvider locale={locale} messages={props.messages[locale]}>
       {React.Children.only(props.children)}
