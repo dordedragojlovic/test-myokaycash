@@ -1,0 +1,60 @@
+import styled from 'styled-components';
+
+export const PageContainer = styled.div`
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+    padding-top: 120px;
+`;
+
+export const TextSection = styled.div`
+    width: 40%;
+    h1{
+        font-style: normal;
+        font-weight: 900;
+        font-size: 55px;
+        line-height: 64px;
+        color: #1F2A3F;
+        margin: 0;
+
+        span{
+            color: #66C664;
+        }
+    }
+
+    h5{
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 23px;
+        color: #66C664;
+        margin: 10px 0 0 0;
+
+    }
+`;
+
+export const QRSection = styled.div`
+    width: 40%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+`;
+
+export const QRContainer = styled.div`
+    width: fit-content;
+    padding: 5px 25px;
+    background: #FFFFFF;
+    box-shadow: 4px 6px 15px rgba(0, 0, 0, 0.19);
+    border-radius: 16px;
+    margin-bottom: 30px;
+
+    h5{
+        margin: 0;
+        font-weight: 900;
+        font-size: 30px;
+        line-height: 35px;
+        text-align: center;
+        color: #000000;
+    }
+`;
+
