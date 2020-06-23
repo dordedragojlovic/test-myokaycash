@@ -7,7 +7,7 @@ export const Container = styled.div`
   position: fixed;
   top: 0;
   width: -webkit-fill-available;
-  height: 80px;
+  height: 118px;
   background-color: #D6D6D6;
 `;
 
