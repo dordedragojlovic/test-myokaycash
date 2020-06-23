@@ -32,3 +32,14 @@ export interface ApplicationRootState {
   // for testing purposes
   readonly test: any;
 }
+
+export type User = {
+  name: string;
+};
+
+export type UserStateHandler = {
+  user?: User;
+  loading: boolean;
+  error?: Error;
+  setUser: (user: User) => void;
+};
