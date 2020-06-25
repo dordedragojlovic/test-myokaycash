@@ -13,6 +13,8 @@ import { hot } from 'react-hot-loader/root';
 
 import HomePage from 'containers/HomePage/Loadable';
 import Linking from 'containers/Linking';
+import LinkingSuccess from 'containers/LinkingSuccessPage';
+import SecretCode from 'containers/SecretCodePage';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import NavBar from 'components/nav-bar';
 import PageWrapper from 'components/page-wrapper';
@@ -26,6 +28,8 @@ function App() {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/linking" component={Linking} />
+          <Route exact path="/linking-success" component={LinkingSuccess} />
+          <Route exact path="/secret-code" component={SecretCode} />
           <Route component={NotFoundPage} />
         </Switch>
       </PageWrapper>
