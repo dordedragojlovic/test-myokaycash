@@ -1,18 +1,19 @@
-import { FormStateHandler } from './types';
+import { FormStateHandler } from 'types';
 import React from 'react';
-import { TextContainer, PageContainer, InputContainer, ButtonContainer, Section } from './styles';
+import { TextContainer, PageContainer, InputContainer, Section } from './styles';
+import StyledButton from 'components/button'
 
 
 
-function HomePageView({ form }: { form: FormStateHandler }) {
+function FormPage({ form, text, buttonText }: { form: FormStateHandler, text: string, buttonText: string }) {
 
   return (
     <form onSubmit={form.handleSubmit}>
         <PageContainer>
             <Section>
                 <TextContainer>
-                <h1>Create your account on My<span>OKAY</span>Cash</h1>
-                <h5>Enter you credentials to create your account</h5>
+                <h1>{text} your account on My<span>OKAY</span>Cash</h1>
+                <h5>Enter you credentials to <span>{text}</span>  your account</h5>
                 </TextContainer>
                 <InputContainer>
                     <div>
@@ -31,12 +32,10 @@ function HomePageView({ form }: { form: FormStateHandler }) {
                     </div>
                 </InputContainer>
             </Section>
-            <ButtonContainer>
-                <button type={'submit'}>ACTIVATE</button>
-            </ButtonContainer>
+            <StyledButton theme={ {color:"#66C664", width:"233px", height:"68px", font:"25px" }} text={buttonText} submit={true} />
         </PageContainer>
     </form>
   );
 }
 
-export default HomePageView;
+export default FormPage;

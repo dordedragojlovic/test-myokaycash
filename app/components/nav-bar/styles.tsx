@@ -20,4 +20,5 @@ export const Button = styled.button`
     color: rgba(0, 0, 0, 0.25);
     border: 0;
     background-color: #EBEBEB;
+    cursor: pointer;
 `;

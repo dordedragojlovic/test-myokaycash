@@ -1,10 +1,12 @@
-import React, { ChangeEvent, useContext } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { withApollo } from '@apollo/react-hoc';
+import { LoginInfo, User } from './types';
+import { FormStateHandler } from 'types'
 import dataProvider from './data-provider';
-import HomePageView from './view';
-import { FormStateHandler, LoginInfo } from './types';
+import HomePageView from './home-page-view';
+import LinkingView from './linking-view';
 
 
 function useForm(configuration: {
@@ -35,25 +37,33 @@ function useForm(configuration: {
 
 
 function HomePage(props) {
+  const [user, setUser] = useState(dataProvider.defaultUser);
   const history = useHistory();
 
   const form = useForm({
     initialValues: { username: '', password: '' },
     onSubmit: async (values) => {
       try {
+        const { code, qrCode, cardInfo } = await dataProvider.createUser(values, props.client);
 
-        const response = await dataProvider.createUser(values, props.client);
+        const userData: User = {
+          name: values.username,
+          code,
+          qrCode,
+          cardInfo
+        }
 
-        console.log('response',response)
-
-        // history.push('/linking');
-
+        setUser(userData);
+       
       } catch (error) {
         console.log('Something went wrong...', error);
       }
     },
   });
-
+  
+ if(user.code !== ''){
+  return <LinkingView user={user}/>;
+ }
 
   return <HomePageView form={form} />;
 }

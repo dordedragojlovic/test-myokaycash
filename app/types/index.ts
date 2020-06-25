@@ -2,6 +2,7 @@ import { Reducer, Store } from 'redux';
 import { RouterState } from 'connected-react-router';
 import { Saga } from 'redux-saga';
 import { SagaInjectionModes } from 'redux-injectors';
+import { ChangeEvent } from 'react';
 
 import { ContainerState as LanguageProviderState } from 'containers/LanguageProvider/types';
 // [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
@@ -33,13 +34,10 @@ export interface ApplicationRootState {
   readonly test: any;
 }
 
-export type User = {
-  name: string;
-};
-
-export type UserStateHandler = {
-  user?: User;
-  loading: boolean;
-  error?: Error;
-  setUser: (user: User) => void;
+export type FormStateHandler = {
+  username: string;
+  password: string;
+  handleSubmit: () => void;
+  onPasswordChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onUsernameChange: (event: ChangeEvent<HTMLInputElement>) => void;
 };

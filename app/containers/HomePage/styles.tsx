@@ -1,18 +1,13 @@
 import styled from 'styled-components';
 
-export const PageContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 200px;
-`;
-
-export const Section = styled.div`
+export const LinkingContainer = styled.div`
     display: flex;
     justify-content: space-around;
+    align-items: baseline;
+    padding-top: 120px;
 `;
 
-export const TextContainer = styled.div`
+export const LinkingTextSection = styled.div`
     width: 40%;
     h1{
         font-style: normal;
@@ -38,50 +33,27 @@ export const TextContainer = styled.div`
     }
 `;
 
-export const InputContainer = styled.div`
+export const QRSection = styled.div`
     width: 40%;
-
-    input{
-        background: #FFFFFF;
-        border: 0;
-        border-radius: 74px;
-        height: 50px;
-        width: 520px;
-        font-weight: 400;
-        font-size: 1.5rem;
-        padding-left: 15px;
-    }
-
-    h3{
-        font-weight: 500;
-        font-size: 20px;
-        line-height: 23px;
-        color: rgba(0, 0, 0, 0.25);
-        margin: 0 0 10px 0;
-    }
-
-    div:first-of-type{
-        margin-bottom: 60px;
-    }
-`;
-
-export const ButtonContainer = styled.div`
-    width: 100%;
-    background: #66C664;
-    border-radius: 41px;
-    height: 68px;
-    width: 233px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    margin-top: 120px;
-
-    button{
-        font-weight: 900;
-        font-size: 25px;
-        line-height: 29px;
-        color: #FFFFFF;
-        border: 0;
-        background: transparent;
-    }
 `;
 
+export const QRContainer = styled.div`
+    width: fit-content;
+    padding: 5px 25px;
+    background: #FFFFFF;
+    box-shadow: 4px 6px 15px rgba(0, 0, 0, 0.19);
+    border-radius: 16px;
+    margin-bottom: 30px;
+
+    h5{
+        margin: 0;
+        font-weight: 900;
+        font-size: 30px;
+        line-height: 35px;
+        text-align: center;
+        color: #000000;
+    }
+`;
