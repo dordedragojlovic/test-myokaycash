@@ -29,9 +29,33 @@ async function createUser(
   ).data.signUp;
 }
 
+async function login(
+  values,
+  client
+): Promise<{ code: string; }> {
+  return (
+    await client.mutate({
+      mutation: gql`
+        mutation logIn ($input: UserLogin! ){
+          logIn(input: $input){
+            code
+          }
+        }
+      `,
+      variables: {
+        input: {
+          username: values.username,
+          password: values.password
+        }
+      },
+    })
+  ).data.logIn;
+}
+
 
 const API = {
-  createUser
+  createUser,
+  login
 };
 
 export default API;

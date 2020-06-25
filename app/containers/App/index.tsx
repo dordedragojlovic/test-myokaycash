@@ -7,7 +7,7 @@ import ApolloClient from "apollo-boost";
 
 import HomePage from 'containers/HomePage/Loadable';
 import LinkingSuccess from 'containers/LinkingSuccessPage';
-import SecretCode from 'containers/SecretCodePage';
+import LoginPage from 'containers/LoginPage'
 import Dashboard from 'containers/Dashboard';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import NavBar from 'components/nav-bar';
@@ -28,7 +28,7 @@ function App() {
             <Switch>
               <Route exact path="/" component={HomePage} />
               <Route exact path="/linking-success" component={LinkingSuccess} />
-              <Route exact path="/secret-code" component={SecretCode} />
+              <Route exact path="/login" component={LoginPage} />
               <Route exact path="/dashboard" component={Dashboard} />
               <Route component={NotFoundPage} />
             </Switch>

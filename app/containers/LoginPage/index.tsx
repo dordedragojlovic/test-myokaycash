@@ -1,13 +1,13 @@
 import React, { ChangeEvent, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { useFormik } from 'formik';
 import { withApollo } from '@apollo/react-hoc';
-import { LoginInfo, User } from 'types';
-import { FormStateHandler } from 'types'
-import dataProvider from './data-provider';
-import HomePageView from './home-page-view';
-import LinkingView from './linking-view';
 
+import { FormStateHandler } from 'types';
+import { useHistory } from 'react-router-dom';
+import LoginView from './view'
+import SecretCodeView from './secret-code-view';
+import { useFormik } from 'formik';
+import dataProvider from './data-provider';
+import { LoginInfo } from 'types';
 
 function useForm(configuration: {
   initialValues: LoginInfo;
@@ -36,36 +36,31 @@ function useForm(configuration: {
 
 
 
-function HomePage(props) {
-  const [user, setUser] = useState(dataProvider.defaultUser);
+function LoginPage(props) {
+  const [code, setCode] = useState('');
   const history = useHistory();
 
   const form = useForm({
     initialValues: { username: '', password: '' },
     onSubmit: async (values) => {
       try {
-        const { code, qrCode, cardInfo } = await dataProvider.createUser(values, props.client);
+        const { code } = await dataProvider.login(values, props.client);
 
-        const userData: User = {
-          name: values.username,
-          code,
-          qrCode,
-          cardInfo
-        }
-
-        setUser(userData);
-       
+        setCode(code);
+      
       } catch (error) {
         console.log('Something went wrong...', error);
       }
     },
   });
-  
- if(user.code !== ''){
-  return <LinkingView user={user}/>;
- }
 
-  return <HomePageView form={form} />;
+  if(code !== ''){
+    return <SecretCodeView code={code}/>;
+   }
+
+  return (
+    <LoginView form={form} />
+  );
 }
 
-export default withApollo(HomePage)
+export default withApollo(LoginPage);

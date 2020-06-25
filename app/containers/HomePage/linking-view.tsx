@@ -1,4 +1,4 @@
-import { User } from './types';
+import { User } from 'types';
 import React from 'react';
 import { LinkingContainer, LinkingTextSection, QRSection, QRContainer } from './styles';
 
