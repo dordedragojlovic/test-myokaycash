@@ -7,8 +7,8 @@ export const Container = styled.div`
   position: fixed;
   top: 0;
   width: -webkit-fill-available;
-  height: 80px;
   background-color: #EBEBEB;
+  height: 118px;
 `;
 
 export const Button = styled.button`

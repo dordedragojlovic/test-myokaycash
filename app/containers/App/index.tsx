@@ -15,6 +15,7 @@ import HomePage from 'containers/HomePage/Loadable';
 import Linking from 'containers/Linking';
 import LinkingSuccess from 'containers/LinkingSuccessPage';
 import SecretCode from 'containers/SecretCodePage';
+import Dashboard from 'containers/Dashboard';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import NavBar from 'components/nav-bar';
 import PageWrapper from 'components/page-wrapper';
@@ -30,6 +31,7 @@ function App() {
           <Route exact path="/linking" component={Linking} />
           <Route exact path="/linking-success" component={LinkingSuccess} />
           <Route exact path="/secret-code" component={SecretCode} />
+          <Route exact path="/dashboard" component={Dashboard} />
           <Route component={NotFoundPage} />
         </Switch>
       </PageWrapper>
