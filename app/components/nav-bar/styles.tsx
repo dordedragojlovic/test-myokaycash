@@ -7,8 +7,8 @@ export const Container = styled.div`
   position: fixed;
   top: 0;
   width: -webkit-fill-available;
-  height: 80px;
-  background-color: #D6D6D6;
+  background-color: #EBEBEB;
+  height: 118px;
 `;
 
 export const Button = styled.button`
@@ -19,5 +19,5 @@ export const Button = styled.button`
     text-decoration-line: underline;
     color: rgba(0, 0, 0, 0.25);
     border: 0;
-    background-color: #D6D6D6;
+    background-color: #EBEBEB;
 `;
