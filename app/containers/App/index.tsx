@@ -20,7 +20,6 @@ import NavBar from 'components/nav-bar';
 import PageWrapper from 'components/page-wrapper';
 
 import GlobalStyle from '../../global-styles';
-import TestView from './../Test'
 
 const client = new ApolloClient({
   uri: `https://myokaycash-backend.herokuapp.com/graphql`
@@ -30,15 +29,14 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <div>
-        {/* <NavBar/>
+        <NavBar/>
         <PageWrapper >
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route component={NotFoundPage} />
           </Switch>
         </PageWrapper>
-        <GlobalStyle /> */}
-        <TestView/>
+        <GlobalStyle />
       </div>
     </ApolloProvider>
   );
