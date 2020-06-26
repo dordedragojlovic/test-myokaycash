@@ -1,9 +1,9 @@
 import React from "react";
 
-import { PageContainer } from './styles';
+import { PageContainer, ButtonContainer } from './styles';
 
 
-const SimplePage = ( {imgSrc, altText, h1, h5}: {imgSrc: string, altText: string, h1: string, h5: string } ) => {
+const SimplePage = ( {showButton, onClick, imgSrc, altText, h1, h5}: {showButton:boolean, onClick:any ,imgSrc: string, altText: string, h1: string, h5: string } ) => {
   return (
       <PageContainer>
           <div>
@@ -11,6 +11,11 @@ const SimplePage = ( {imgSrc, altText, h1, h5}: {imgSrc: string, altText: string
           </div>
           <h1>{h1}</h1>
           <h5>{h5}</h5>
+          { showButton &&
+            <ButtonContainer>
+              <button onClick={onClick}>Next</button>
+            </ButtonContainer>
+          }
       </PageContainer>
   );
 };
