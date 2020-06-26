@@ -9,6 +9,7 @@ export const LinkingContainer = styled.div`
 
 export const LinkingTextSection = styled.div`
     width: 40%;
+
     h1{
         font-style: normal;
         font-weight: 900;
@@ -20,6 +21,12 @@ export const LinkingTextSection = styled.div`
         span{
             color: #66C664;
         }
+    }
+
+    h4{
+        font-weight: 500;
+        margin: 50px 0 10px 0;
+        color: #1F2A3F;
     }
 
     h5{
@@ -55,5 +62,32 @@ export const QRContainer = styled.div`
         line-height: 35px;
         text-align: center;
         color: #000000;
+    }
+`;
+
+export const CardNumberContainer = styled.div`
+
+    display:flex;
+
+    button{
+        background: #1F2A3F;
+        border-radius: 41px;
+        height: 32px;
+        width: 110px;
+        text-align: center;
+        cursor: pointer;
+        font-weight: 900;
+        font-size: 16px;
+        line-height: 29px;
+        color: #FFFFFF;
+        border: 0;
+        cursor: pointer;
+        margin: 3px 5px 0 20px
+    }
+
+    textarea{
+        font-size: 16px;
+        width: 170px;
+        padding-left: 5px;
     }
 `;

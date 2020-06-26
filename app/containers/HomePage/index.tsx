@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { withApollo } from '@apollo/react-hoc';
@@ -38,7 +38,14 @@ function useForm(configuration: {
 
 function HomePage(props) {
   const [user, setUser] = useState(dataProvider.defaultUser);
+  const textAreaRef = useRef(null);
   const history = useHistory();
+
+  function copyToClipboard(e) {
+    textAreaRef.current.select();
+    document.execCommand('copy');
+    e.target.focus();
+  };
 
   const form = useForm({
     initialValues: { username: '', password: '' },
@@ -62,9 +69,9 @@ function HomePage(props) {
   });
   
  if(user.code !== ''){
-  return <LinkingView user={user}/>;
+  return <LinkingView user={user} copyToClipboard={copyToClipboard} textAreaRef={textAreaRef}/>;
  }
-
+ 
   return <HomePageView form={form} />;
 }
 

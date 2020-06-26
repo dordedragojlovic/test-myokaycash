@@ -1,13 +1,31 @@
 import { User } from 'types';
 import React from 'react';
-import { LinkingContainer, LinkingTextSection, QRSection, QRContainer } from './styles';
+import { LinkingContainer, LinkingTextSection, QRSection, QRContainer, CardNumberContainer } from './styles';
 
-function LinkingView({user}: {user: User}) {
+function LinkingView({user, copyToClipboard, textAreaRef }: {user: User, copyToClipboard, textAreaRef: React.MutableRefObject<null>}) {
+
   return (
     <LinkingContainer>
       <LinkingTextSection>
         <h1>Okay, {user.name}</h1>
         <h5>Finalize your registration by scanning the QR code or enter the 6 digit number in to your app</h5>
+        <div>
+          <h4>This is your credit card number:</h4>
+          <CardNumberContainer>
+            <form>
+              <textarea
+                ref={textAreaRef}
+                defaultValue={user.cardInfo.number}
+              />
+            </form>
+            {
+            document.queryCommandSupported('copy') &&
+              <div>
+                <button onClick={copyToClipboard}>Copy</button> 
+              </div>
+            }
+          </CardNumberContainer>
+        </div>
       </LinkingTextSection>
       <QRSection>
         <QRContainer>
