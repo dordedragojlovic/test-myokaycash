@@ -4,6 +4,8 @@ import { LinkingContainer, LinkingTextSection, QRSection, QRContainer, CardNumbe
 
 function LinkingView({user, copyToClipboard, textAreaRef }: {user: User, copyToClipboard, textAreaRef: React.MutableRefObject<null>}) {
 
+  console.log('user.qrCode',user.qrCode);
+
   return (
     <LinkingContainer>
       <LinkingTextSection>
@@ -29,7 +31,7 @@ function LinkingView({user, copyToClipboard, textAreaRef }: {user: User, copyToC
       </LinkingTextSection>
       <QRSection>
         <QRContainer>
-          <img  src="https://i.ibb.co/7Gq4J4n/ezgif-com-crop.png"  alt="QR Code"  />
+          <img  src={`data:image/png;base64,${user.qrCode}`}  alt="QR Code"  />
           <h5>{user.code}</h5>
         </QRContainer>
         <div>

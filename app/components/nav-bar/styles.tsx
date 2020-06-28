@@ -11,7 +11,7 @@ export const Container = styled.div`
   height: 118px;
 `;
 
-export const Button = styled.button`
+export const Button = styled.a`
     font-style: normal;
     font-weight: 500;
     font-size: 20px;

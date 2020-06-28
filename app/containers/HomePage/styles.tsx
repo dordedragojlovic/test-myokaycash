@@ -49,7 +49,7 @@ export const QRSection = styled.div`
 
 export const QRContainer = styled.div`
     width: fit-content;
-    padding: 5px 25px;
+    padding: 3px 10px 15px 10px;
     background: #FFFFFF;
     box-shadow: 4px 6px 15px rgba(0, 0, 0, 0.19);
     border-radius: 16px;

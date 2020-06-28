@@ -7,7 +7,7 @@ const NavBar = () => {
   return (
   <Container>
       <a href="/"><MyOkayCash/></a>
-      <Button>Reset</Button>
+      <Button href="/">Reset</Button>
   </Container>
   );
 };
