@@ -46,6 +46,13 @@ function LoginPage() {
         const { code } = await dataProvider.login(values);
 
         setCode(code);
+
+        const observable = dataProvider.userValid(values.username);
+        observable.subscribe((value) => {
+          if(value){
+            history.push('/dashboard');
+          }
+        });
       
       } catch (error) {
         console.log('Something went wrong...', error);
