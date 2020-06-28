@@ -36,7 +36,7 @@ function useForm(configuration: {
 
 
 
-function LoginPage(props) {
+function LoginPage() {
   const [code, setCode] = useState('');
   const history = useHistory();
 
@@ -44,7 +44,7 @@ function LoginPage(props) {
     initialValues: { username: '', password: '' },
     onSubmit: async (values) => {
       try {
-        const { code } = await dataProvider.login(values, props.client);
+        const { code } = await dataProvider.login(values);
 
         setCode(code);
       

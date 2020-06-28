@@ -36,7 +36,7 @@ function useForm(configuration: {
 
 
 
-function HomePage(props) {
+function HomePage() {
   const [user, setUser] = useState(dataProvider.defaultUser);
   const history = useHistory();
 
@@ -44,7 +44,7 @@ function HomePage(props) {
     initialValues: { username: '', password: '' },
     onSubmit: async (values) => {
       try {
-        const { code, qrCode, cardInfo } = await dataProvider.createUser(values, props.client);
+        const { code, qrCode, cardInfo } = await dataProvider.createUser(values);
 
         const userData: User = {
           name: values.username,
