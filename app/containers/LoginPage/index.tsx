@@ -1,5 +1,4 @@
 import React, { ChangeEvent, useState } from 'react';
-import { withApollo } from '@apollo/react-hoc';
 
 import { FormStateHandler } from 'types';
 import { useHistory } from 'react-router-dom';
@@ -63,4 +62,4 @@ function LoginPage() {
   );
 }
 
-export default withApollo(LoginPage);
+export default LoginPage;
