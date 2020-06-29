@@ -1,5 +1,4 @@
 import React, { ChangeEvent, useState } from 'react';
-import { withApollo } from '@apollo/react-hoc';
 
 import { FormStateHandler } from 'types';
 import { useHistory } from 'react-router-dom';
@@ -36,7 +35,7 @@ function useForm(configuration: {
 
 
 
-function LoginPage(props) {
+function LoginPage() {
   const [code, setCode] = useState('');
   const history = useHistory();
 
@@ -44,9 +43,16 @@ function LoginPage(props) {
     initialValues: { username: '', password: '' },
     onSubmit: async (values) => {
       try {
-        const { code } = await dataProvider.login(values, props.client);
+        const { code } = await dataProvider.login(values);
 
         setCode(code);
+
+        const observable = dataProvider.userValid(values.username);
+        observable.subscribe((value) => {
+          if(value){
+            history.push('/dashboard');
+          }
+        });
       
       } catch (error) {
         console.log('Something went wrong...', error);
@@ -63,4 +69,4 @@ function LoginPage(props) {
   );
 }
 
-export default withApollo(LoginPage);
+export default LoginPage;

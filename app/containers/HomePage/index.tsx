@@ -1,13 +1,11 @@
 import React, { ChangeEvent, useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { withApollo } from '@apollo/react-hoc';
 import { LoginInfo, User } from 'types';
 import { FormStateHandler } from 'types'
 import dataProvider from './data-provider';
 import HomePageView from './home-page-view';
 import LinkingView from './linking-view';
-
 
 function useForm(configuration: {
   initialValues: LoginInfo;
@@ -35,8 +33,7 @@ function useForm(configuration: {
 }
 
 
-
-function HomePage(props) {
+function HomePage() {
   const [user, setUser] = useState(dataProvider.defaultUser);
   const textAreaRef = useRef(null);
   const history = useHistory();
@@ -51,7 +48,13 @@ function HomePage(props) {
     initialValues: { username: '', password: '' },
     onSubmit: async (values) => {
       try {
-        const { code, qrCode, cardInfo } = await dataProvider.createUser(values, props.client);
+        const { code, qrCode, cardInfo } = await dataProvider.createUser(values);
+        const observable = dataProvider.userLinked(values.username);
+        observable.subscribe((value) => {
+          if(value){
+            history.push('/linking-success');
+          }
+        });
 
         const userData: User = {
           name: values.username,
@@ -59,11 +62,11 @@ function HomePage(props) {
           qrCode,
           cardInfo
         }
-
+        
         setUser(userData);
        
       } catch (error) {
-        console.log('Something went wrong...', error);
+        console.log('Something went wrong...Error message: ', error);
       }
     },
   });
@@ -75,4 +78,4 @@ function HomePage(props) {
   return <HomePageView form={form} />;
 }
 
-export default withApollo(HomePage)
+export default HomePage

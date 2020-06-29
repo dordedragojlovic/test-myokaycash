@@ -64,7 +64,9 @@
     "@apollo/react-hoc": "3.1.5",
     "@apollo/react-hooks": "3.1.5",
     "@hot-loader/react-dom": "16.13.0",
+    "@types/graphql": "14.5.0",
     "apollo-boost": "0.4.9",
+    "apollo-link-ws": "1.0.20",
     "connected-react-router": "6.8.0",
     "fontfaceobserver": "2.1.0",
     "formik": "2.1.4",
@@ -88,6 +90,7 @@
     "reselect": "4.0.0",
     "sanitize.css": "11.0.0",
     "styled-components": "4.3.2",
+    "subscriptions-transport-ws": "0.9.16",
     "typesafe-actions": "5.1.0"
   },
   "devDependencies": {
