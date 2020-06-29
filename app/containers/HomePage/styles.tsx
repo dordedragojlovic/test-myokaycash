@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { responsive } from 'styles/responsive';
 
 export const LinkingContainer = styled.div`
     display: flex;
@@ -38,6 +39,21 @@ export const LinkingTextSection = styled.div`
         margin: 10px 0 0 0;
 
     }
+
+    ${responsive.md} {
+        h1{
+            font-size: 45px;
+            line-height: 40px;
+        }
+        h5{
+            font-size: 18px;
+        }
+    }
+
+    ${responsive.xl} {
+        width: 28%;
+    }
+
 `;
 
 export const QRSection = styled.div`
@@ -45,6 +61,10 @@ export const QRSection = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+
+    ${responsive.xl} {
+        width: 30%;
+    }
 `;
 
 export const QRContainer = styled.div`

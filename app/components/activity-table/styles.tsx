@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { responsive } from 'styles/responsive';
 
 export const ActivityDetails = styled.div`
   display: flex;
@@ -8,12 +9,21 @@ export const ActivityDetails = styled.div`
   h3{
     margin:0;
   }
+  ${responsive.md} {
+    margin-bottom: 15px;
+      h3{
+        font-size: 0.9rem;
+      }
+    }
 `;
 
 export const Date = styled.div`
   width: 35%;
   font-size: 28px;
   color: rgba(0, 0, 0, 0.55);
+  ${responsive.md} {
+      font-size: 24px;
+    }
 `;
 
 export const Price = styled.h3`
@@ -24,12 +34,19 @@ export const Price = styled.h3`
 export const Month = styled.h4`
   margin: 25px 0 5px 0;
   color: rgba(0, 0, 0, 0.25);
+  ${responsive.md} {
+      font-size: 0.9rem;
+    }
 `;
 
 export const Title = styled.h1`
     color:#66C664;
     margin: 0;
     font-size: 1.3rem;
+
+    ${responsive.md} {
+      font-size: 1rem;
+    }
 `;
 
 export const RecentActivity = styled.div`

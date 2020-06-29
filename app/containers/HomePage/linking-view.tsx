@@ -12,7 +12,7 @@ function LinkingView({user, copyToClipboard, textAreaRef }: {user: User, copyToC
         <h1>Okay, {user.name}</h1>
         <h5>Finalize your registration by scanning the QR code or enter the 6 digit number in to your app</h5>
         <div>
-          <h4>This is your credit card number:</h4>
+          <h4>Save your credit card number</h4>
           <CardNumberContainer>
             <form>
               <textarea
