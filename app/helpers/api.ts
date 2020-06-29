@@ -70,6 +70,19 @@ async function login(
   ).data.logIn;
 }
 
+async function cleareDB(): Promise<{ reset: boolean }> {
+  return (
+    await client.mutate({
+      mutation: gql`
+      mutation RESET {
+        reset
+      }
+      `,
+      variables: { },
+    })
+  ).data.reset;
+}
+
 function getLinkingObservable(name: string): Observable<boolean> {
   const fetchResultObservable = createSubscriptionObservable(
     gql`
@@ -94,12 +107,12 @@ function getValidityObservable(name: string): Observable<boolean> {
   return Observable.from(fetchResultObservable).map((value) => value.data?.userLoginConfirmSuccessful);
 }
 
-
 const API = {
   createUser,
   login,
   getLinkingObservable,
-  getValidityObservable
+  getValidityObservable,
+  cleareDB
 };
 
 export default API;
