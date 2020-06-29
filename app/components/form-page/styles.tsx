@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { responsive } from 'styles/responsive';
 
 export const PageContainer = styled.div`
     display: flex;
@@ -41,6 +42,16 @@ export const TextContainer = styled.div`
         }
 
     }
+
+    ${responsive.md} {
+        h1{
+            font-size: 40px;
+            line-height: 48px;
+        }
+        h5{
+            font-size: 18px;
+        }
+    }
 `;
 
 export const InputContainer = styled.div`
@@ -51,7 +62,7 @@ export const InputContainer = styled.div`
         border: 0;
         border-radius: 74px;
         height: 50px;
-        width: 520px;
+        width: 52vh;
         font-weight: 400;
         font-size: 1.5rem;
         padding-left: 15px;

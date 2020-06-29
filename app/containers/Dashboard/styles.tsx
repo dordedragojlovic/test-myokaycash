@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { responsive } from 'styles/responsive';
 
 export const PageContainer = styled.div`
   display: flex;
@@ -45,6 +46,9 @@ export const Actions = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  ${responsive.md} {
+      width: 38%;
+    }
 `;
 
 export const ExpensesReport = styled.div`

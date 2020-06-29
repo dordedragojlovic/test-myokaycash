@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { responsive } from 'styles/responsive';
 
 export const ComponentContainer = styled.div`
   width: 100%;
@@ -29,5 +30,9 @@ export const Title = styled.h1`
     color:#66C664;
     margin: 0;
     font-size: 1.3rem;
+
+    ${responsive.md} {
+      font-size: 1rem;
+    }
 `;
 
