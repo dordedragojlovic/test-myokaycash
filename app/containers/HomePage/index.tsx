@@ -39,7 +39,9 @@ function HomePage() {
   const history = useHistory();
 
   function copyToClipboard(e) {
-    textAreaRef.current.select();
+
+      (textAreaRef as any).current.select();
+
     document.execCommand('copy');
     e.target.focus();
   };

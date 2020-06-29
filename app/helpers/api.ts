@@ -79,7 +79,7 @@ function getLinkingObservable(name: string): Observable<boolean> {
     `,
     { username: name }
   );
-  return Observable.from(fetchResultObservable).map((value) => value.data.userLinked);
+  return Observable.from(fetchResultObservable).map((value) => value.data?.userLinked);
 }
 
 function getValidityObservable(name: string): Observable<boolean> {
@@ -91,7 +91,7 @@ function getValidityObservable(name: string): Observable<boolean> {
     `,
     { username: name }
   );
-  return Observable.from(fetchResultObservable).map((value) => value.data.userLoginConfirmSuccessful);
+  return Observable.from(fetchResultObservable).map((value) => value.data?.userLoginConfirmSuccessful);
 }
 
 
