@@ -6,12 +6,24 @@ export const PageContainer = styled.div`
     flex-direction: column;
     align-items: center;
     padding-top: 200px;
+
+    ${responsive.sm} {
+        padding-top: 100px;
+    }
 `;
 
 export const Section = styled.div`
     display: flex;
     justify-content: space-around;
     margin-bottom: 120px;
+
+    ${responsive.sm} {
+        flex-direction: column;
+    }
+
+    ${responsive.iPadPro} {
+        flex-direction: column;
+    }
 `;
 
 export const TextContainer = styled.div`
@@ -43,7 +55,12 @@ export const TextContainer = styled.div`
 
     }
 
-    ${responsive.md} {
+    ${responsive.sm} {
+        width: 100%;
+        margin-bottom: 120px;
+    }
+
+    ${responsive.mdpi} {
         h1{
             font-size: 40px;
             line-height: 48px;
@@ -51,6 +68,21 @@ export const TextContainer = styled.div`
         h5{
             font-size: 18px;
         }
+    }
+
+    ${responsive.mac} {
+        h1{
+            font-size: 46px;
+            line-height: 55px;
+        }
+        h5{
+            font-size: 18px;
+        }
+    }
+
+    ${responsive.iPadPro} {
+        width: 90%;
+        margin-bottom: 80px;
     }
 `;
 
@@ -78,5 +110,13 @@ export const InputContainer = styled.div`
 
     div:first-of-type{
         margin-bottom: 60px;
+    }
+
+    ${responsive.sm} {
+        width: 100%;
+    }
+
+    ${responsive.iPadPro} {
+        width: 100%;
     }
 `;

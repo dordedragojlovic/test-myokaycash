@@ -23,6 +23,15 @@ export const StyledTable = styled.table`
       text-align: left;
   }
 
+  ${responsive.sm} {
+    tr{
+      font-size: 0.9rem;
+    }
+    td{
+      font-size: 0.9rem;
+    }
+  }
+
 
 `;
 

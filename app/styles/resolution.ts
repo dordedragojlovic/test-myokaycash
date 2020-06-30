@@ -4,13 +4,12 @@ export const screen = {
     xs: 500,
     sm: 768,
     md: 1024,
+    mdpi: 1280,
     mac: 1440,
     lg: 1600,
     xl: 1920,
   
-    get xsMin() {
-      return this.xs;
-    },
+
     get xsMax() {
       return this.sm - 1;
     },
@@ -24,10 +23,19 @@ export const screen = {
       return this.md;
     },
     get mdMax() {
-      return this.lg - 1;
+      return this.mdpi - 1;
+    },
+    get mdpiMin() {
+      return this.mdpi;
+    },
+    get mdpiMax() {
+      return this.mac - 1;
+    },
+    get macMin() {
+      return this.mac;
     },
     get macMax() {
-        return this.mac - 1;
+        return this.lg - 1;
     },
     get lgMin() {
       return this.lg;

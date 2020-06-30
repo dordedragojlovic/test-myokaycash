@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { responsive } from 'styles/responsive';
 
 export const Container = styled.div`
   display: flex;
@@ -21,4 +22,8 @@ export const Button = styled.button`
     border: 0;
     background-color: #EBEBEB;
     cursor: pointer;
+
+    ${responsive.sm} {
+        margin-top: 35px;
+    }
 `;

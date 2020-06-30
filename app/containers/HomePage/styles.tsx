@@ -6,6 +6,17 @@ export const LinkingContainer = styled.div`
     justify-content: space-around;
     align-items: baseline;
     padding-top: 120px;
+
+    ${responsive.sm} {
+        flex-direction: column;
+        padding-top: 100px;
+    }
+
+    ${responsive.iPadPro} {
+        flex-direction: column;
+        align-items: center;
+        padding-top: 100px;
+    }
 `;
 
 export const LinkingTextSection = styled.div`
@@ -40,13 +51,26 @@ export const LinkingTextSection = styled.div`
 
     }
 
+    ${responsive.sm} {
+        width: 100%;
+    }
+
     ${responsive.md} {
+        width: 46%;
         h1{
             font-size: 45px;
             line-height: 40px;
         }
         h5{
             font-size: 18px;
+        }
+    }
+
+    ${responsive.iPadPro} {
+        width: 57%;
+        margin-bottom: 30px;
+        h4{
+            margin: 35px 0 10px 0;
         }
     }
 
@@ -61,6 +85,14 @@ export const QRSection = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+
+    ${responsive.sm} {
+        width: 100%;
+    }
+
+    ${responsive.iPadPro} {
+        width: 75%;
+    }
 
     ${responsive.xl} {
         width: 30%;
@@ -85,9 +117,30 @@ export const QRContainer = styled.div`
     }
 `;
 
+export const CardNumberSection = styled.div`
+
+    ${responsive.sm} {
+        text-align: center;
+        margin-bottom: 65px;
+    }
+
+    ${responsive.iPadPro} {
+        margin-bottom: 130px;
+    }
+
+`;
+
 export const CardNumberContainer = styled.div`
 
     display:flex;
+
+    div{
+        display:flex;
+    }
+
+    ${responsive.sm} {
+        justify-content: center;
+    }
 
     button{
         background: #1F2A3F;

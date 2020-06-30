@@ -9,7 +9,7 @@ export const ActivityDetails = styled.div`
   h3{
     margin:0;
   }
-  ${responsive.md} {
+  ${responsive.mdpi} {
     margin-bottom: 15px;
       h3{
         font-size: 0.9rem;
@@ -21,7 +21,7 @@ export const Date = styled.div`
   width: 35%;
   font-size: 28px;
   color: rgba(0, 0, 0, 0.55);
-  ${responsive.md} {
+  ${responsive.mdpi} {
       font-size: 24px;
     }
 `;
@@ -34,7 +34,7 @@ export const Price = styled.h3`
 export const Month = styled.h4`
   margin: 25px 0 5px 0;
   color: rgba(0, 0, 0, 0.25);
-  ${responsive.md} {
+  ${responsive.mdpi} {
       font-size: 0.9rem;
     }
 `;
@@ -44,7 +44,7 @@ export const Title = styled.h1`
     margin: 0;
     font-size: 1.3rem;
 
-    ${responsive.md} {
+    ${responsive.mdpi} {
       font-size: 1rem;
     }
 `;
@@ -60,6 +60,17 @@ export const RecentActivity = styled.div`
     color: rgba(0, 0, 0, 0.25);
     margin: 0;
   }
+
+  ${responsive.sm} {
+      width: 100%;
+    }
+
+  ${responsive.mdpi} {
+    padding: 20px 30px 10px 30px;
+  }
+  ${responsive.iPadPro} {
+    width: 100%;
+  }
 `;
 
 export const ActivityType = styled.div`
@@ -73,5 +84,17 @@ export const PriceTimeContainer = styled.div`
 
     h5{
       font-weight:400;
+    }
+
+    ${responsive.sm} {
+      width: 20%;
+    }
+
+    ${responsive.mdpi} {
+      width: 21%;
+    }
+
+    ${responsive.mac} {
+      width: 21%;
     }
 `;

@@ -35,6 +35,7 @@ function useForm(configuration: {
 
 function HomePage() {
   const [user, setUser] = useState(dataProvider.defaultUser);
+  const [copySuccess, setCopySuccess] = useState('Copy');
   const textAreaRef = useRef(null);
   const history = useHistory();
 
@@ -44,6 +45,7 @@ function HomePage() {
 
     document.execCommand('copy');
     e.target.focus();
+    setCopySuccess('Copied !');
   };
 
   const form = useForm({
@@ -74,7 +76,7 @@ function HomePage() {
   });
   
  if(user.code !== ''){
-  return <LinkingView user={user} copyToClipboard={copyToClipboard} textAreaRef={textAreaRef}/>;
+  return <LinkingView user={user} copyToClipboard={copyToClipboard} textAreaRef={textAreaRef} copySuccess={copySuccess}/>;
  }
  
   return <HomePageView form={form} />;
