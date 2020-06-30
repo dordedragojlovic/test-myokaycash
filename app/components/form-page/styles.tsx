@@ -6,12 +6,20 @@ export const PageContainer = styled.div`
     flex-direction: column;
     align-items: center;
     padding-top: 200px;
+
+    ${responsive.sm} {
+        padding-top: 100px;
+    }
 `;
 
 export const Section = styled.div`
     display: flex;
     justify-content: space-around;
     margin-bottom: 120px;
+
+    ${responsive.sm} {
+        flex-direction: column;
+    }
 `;
 
 export const TextContainer = styled.div`
@@ -41,6 +49,11 @@ export const TextContainer = styled.div`
             text-transform: lowercase;
         }
 
+    }
+
+    ${responsive.sm} {
+        width: 100%;
+        margin-bottom: 120px;
     }
 
     ${responsive.md} {
@@ -78,5 +91,9 @@ export const InputContainer = styled.div`
 
     div:first-of-type{
         margin-bottom: 60px;
+    }
+
+    ${responsive.sm} {
+        width: 100%;
     }
 `;

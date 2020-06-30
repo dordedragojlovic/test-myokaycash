@@ -60,6 +60,10 @@ export const RecentActivity = styled.div`
     color: rgba(0, 0, 0, 0.25);
     margin: 0;
   }
+
+  ${responsive.sm} {
+      width: 100%;
+    }
 `;
 
 export const ActivityType = styled.div`
@@ -73,5 +77,9 @@ export const PriceTimeContainer = styled.div`
 
     h5{
       font-weight:400;
+    }
+
+    ${responsive.sm} {
+      width: 20%;
     }
 `;

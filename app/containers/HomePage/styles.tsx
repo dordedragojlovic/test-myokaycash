@@ -6,6 +6,11 @@ export const LinkingContainer = styled.div`
     justify-content: space-around;
     align-items: baseline;
     padding-top: 120px;
+
+    ${responsive.sm} {
+        flex-direction: column;
+        padding-top: 100px;
+    }
 `;
 
 export const LinkingTextSection = styled.div`
@@ -40,6 +45,10 @@ export const LinkingTextSection = styled.div`
 
     }
 
+    ${responsive.sm} {
+        width: 100%;
+    }
+
     ${responsive.md} {
         h1{
             font-size: 45px;
@@ -61,6 +70,10 @@ export const QRSection = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+
+    ${responsive.sm} {
+        width: 100%;
+    }
 
     ${responsive.xl} {
         width: 30%;
@@ -85,9 +98,26 @@ export const QRContainer = styled.div`
     }
 `;
 
+export const CardNumberSection = styled.div`
+
+    ${responsive.sm} {
+        text-align: center;
+        margin-bottom: 65px;
+    }
+
+`;
+
 export const CardNumberContainer = styled.div`
 
     display:flex;
+
+    div{
+        display:flex;
+    }
+
+    ${responsive.sm} {
+        justify-content: center;
+    }
 
     button{
         background: #1F2A3F;

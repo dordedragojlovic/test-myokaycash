@@ -17,6 +17,12 @@ export const Text = styled.div`
     margin-right: 30px;
     font-weight: 400; 
   }
+
+  ${responsive.sm} {
+      h1{
+        font-size: 1.2rem;
+      }
+    }
 `;
 
 export const Header = styled.div`
@@ -49,13 +55,25 @@ export const Actions = styled.div`
   ${responsive.md} {
       width: 38%;
     }
+    ${responsive.sm} {
+      width: 57%;
+    }
 `;
 
 export const ExpensesReport = styled.div`
    width: 49%;
+
+   ${responsive.sm} {
+      width: 100%;
+      margin-top: 30px;
+    }
 `;
 
 export const DetailsSection = styled.div`
     display: flex;
     justify-content: space-between;
+
+    ${responsive.sm} {
+      flex-direction: column;
+    }
 `;
