@@ -26,8 +26,8 @@ async function createUser(
   return (
     await client.mutate({
       mutation: gql`
-        mutation signUp ($input: UserLogin! ){
-          signUp(input: $input){
+        mutation createAccount ($input: UserLogin! ){
+          createAccount(input: $input){
             code
             qrCode
             cardInfo{
@@ -45,7 +45,7 @@ async function createUser(
         }
       },
     })
-  ).data.signUp;
+  ).data.createAccount;
 }
 
 async function login(
