@@ -11,8 +11,40 @@ export const Text = styled.div`
   display: flex;
   justify-content: end;
   align-items: baseline;
+  width: 12%;
 
-  h5{
+  ${responsive.sm} {
+    width: 31%;
+  }
+  ${responsive.md} {
+    width: 27%;
+  }
+  ${responsive.mdpi} {
+      width: 20%;
+  }
+  ${responsive.mac} {
+      width: 16%;
+  }
+  ${responsive.lg} {
+      width: 13%;
+  }
+  ${responsive.iPadPro} {
+    width: 15%;
+  }
+
+  h4{
+    color: #66C664;
+    font-weight: 400; 
+  }
+
+`;
+
+export const Balance = styled.div`
+  display: flex;
+  justify-content: end;
+  align-items: baseline;
+
+  h4{
     color: #66C664;
     margin-right: 30px;
     font-weight: 400; 
@@ -39,12 +71,19 @@ export const Header = styled.div`
   }
 `;
 
-export const TotalBalance = styled.div`
+export const Section = styled.div`
   display: flex;
   background: #FFFFFF;
   margin-bottom: 30px;
   padding: 0 30px;
   justify-content: space-between; 
+`;
+
+export const Action = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: -webkit-fill-available;
 `;
 
 export const Actions = styled.div`
@@ -62,9 +101,6 @@ export const Actions = styled.div`
   ${responsive.iPadPro} {
     width: 53%;
   }
-
-
-
 `;
 
 export const ExpensesReport = styled.div`
