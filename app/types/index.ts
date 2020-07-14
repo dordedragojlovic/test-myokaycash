@@ -5,7 +5,6 @@ import { SagaInjectionModes } from 'redux-injectors';
 import { ChangeEvent } from 'react';
 
 import { ContainerState as LanguageProviderState } from 'containers/LanguageProvider/types';
-// [IMPORT NEW CONTAINERSTATE ABOVE] < Needed for generating containers seamlessly
 
 export interface InjectedStore extends Store {
   injectedReducers: any;
@@ -24,14 +23,9 @@ export interface InjectSagaParams {
   mode?: SagaInjectionModes;
 }
 
-// Your root reducer type, which is your redux state types also
 export interface ApplicationRootState {
   readonly router: RouterState;
   readonly language: LanguageProviderState;
-  // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
-
-  // for testing purposes
-  readonly test: any;
 }
 
 export type FormStateHandler = {
@@ -42,20 +36,19 @@ export type FormStateHandler = {
   onUsernameChange: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
-export type LoginInfo = {
+export interface LoginInfo {
   username: string;
   password: string;
 };
 
-export type CreditCard = {
-  number: string;
-  cvc: string;
-  validity: string
-};
-
-export type User = {
+export interface User {
   name: string;
   code: string;
   qrCode: string;
-  cardInfo: CreditCard;
-};
+  cardInfo: CardInfo;
+}
+interface CardInfo {
+  number: string;
+  cvc: string;
+  validity: string;
+}

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState, useRef } from 'react';
+import React, { ChangeEvent, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { LoginInfo, User } from 'types';
@@ -6,6 +6,7 @@ import { FormStateHandler } from 'types'
 import dataProvider from './data-provider';
 import HomePageView from './home-page-view';
 import LinkingView from './linking-view';
+import { UserContext } from 'helpers/userContext';
 
 function useForm(configuration: {
   initialValues: LoginInfo;
@@ -34,19 +35,8 @@ function useForm(configuration: {
 
 
 function HomePage() {
-  const [user, setUser] = useState(dataProvider.defaultUser);
-  const [copySuccess, setCopySuccess] = useState('Copy');
-  const textAreaRef = useRef(null);
+  const {value, setContext} = useContext(UserContext);
   const history = useHistory();
-
-  function copyToClipboard(e) {
-
-      (textAreaRef as any).current.select();
-
-    document.execCommand('copy');
-    e.target.focus();
-    setCopySuccess('Copied !');
-  };
 
   const form = useForm({
     initialValues: { username: '', password: '' },
@@ -67,7 +57,7 @@ function HomePage() {
           cardInfo
         }
         
-        setUser(userData);
+        setContext(userData);
        
       } catch (error) {
         console.log('Something went wrong...Error message: ', error);
@@ -75,8 +65,8 @@ function HomePage() {
     },
   });
   
- if(user.code !== ''){
-  return <LinkingView user={user} copyToClipboard={copyToClipboard} textAreaRef={textAreaRef} copySuccess={copySuccess}/>;
+ if(value.code !== ''){
+  return <LinkingView user={value}/>;
  }
  
   return <HomePageView form={form} />;
