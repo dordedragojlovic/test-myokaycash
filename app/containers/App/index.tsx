@@ -20,18 +20,18 @@ function App() {
 
   return (
       <div>
-        <NavBar/>
-          <PageWrapper>
           <UserContext.Provider value={{ value, setContext}} >
-              <Switch>
-                <Route exact path="/" component={HomePage} />
-                <Route exact path="/linking-success" component={LinkingSuccess} />
-                <Route exact path="/login" component={LoginPage} />
-                <Route exact path="/dashboard" component={Dashboard} />
-                <Route component={NotFoundPage} />
-              </Switch>
-          </UserContext.Provider>
-          </PageWrapper>
+            <NavBar/>
+            <PageWrapper>
+                <Switch>
+                  <Route exact path="/" component={HomePage} />
+                  <Route exact path="/linking-success" component={LinkingSuccess} />
+                  <Route exact path="/login" component={LoginPage} />
+                  <Route exact path="/dashboard" component={Dashboard} />
+                  <Route component={NotFoundPage} />
+                </Switch>
+            </PageWrapper>
+            </UserContext.Provider>
         <GlobalStyle />
       </div>
   );

@@ -26,6 +26,7 @@ function FormPage({ form, text, buttonText }: { form: FormStateHandler, text: st
                     <div>
                         <h3>Password</h3>
                         <input
+                            type="password"
                             value={form.password}
                             onChange={form.onPasswordChange}
                         />
