@@ -5,17 +5,17 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
-
-import NotFound from '../index';
-import messages from '../messages';
+import NotFound from '..';
 
 describe('<NotFound />', () => {
-  it('should render the Page Not Found text', () => {
-    const { queryByText } = render(
+  it('should render and match the snapshot', () => {
+    const {
+      container: { firstChild },
+    } = render(
       <IntlProvider locale="en">
         <NotFound />
       </IntlProvider>,
     );
-    expect(queryByText(messages.header.defaultMessage)).toBeInTheDocument();
+    expect(firstChild).toMatchSnapshot();
   });
 });
