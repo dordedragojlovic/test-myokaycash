@@ -4,10 +4,10 @@ import FormPage from 'components/form-page'
 
 
 
-function HomePageView({ form }: { form: FormStateHandler }) {
+function HomePageView({ form, loading }: { form: FormStateHandler, loading: boolean }) {
 
   return (
-    <FormPage form={form} text="Create" buttonText="ACTIVATE"  />
+    <FormPage form={form} text="Create" buttonText="ACTIVATE" loading={loading} />
   );
 }
 

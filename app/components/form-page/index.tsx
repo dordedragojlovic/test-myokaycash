@@ -5,7 +5,7 @@ import StyledButton from 'components/button'
 
 
 
-function FormPage({ form, text, buttonText }: { form: FormStateHandler, text: string, buttonText: string }) {
+function FormPage({ form, text, buttonText, loading }: { form: FormStateHandler, text: string, buttonText: string, loading: boolean }) {
 
   return (
     <form onSubmit={form.handleSubmit}>
@@ -33,7 +33,7 @@ function FormPage({ form, text, buttonText }: { form: FormStateHandler, text: st
                     </div>
                 </InputContainer>
             </Section>
-            <StyledButton theme={ {color:"#66C664", width:"233px", height:"68px", font:"25px" }} text={buttonText} submit={true} />
+            <StyledButton theme={ {color:"#66C664", width:"233px", height:"68px", font:"25px" }} text={buttonText} submit={true} loading={loading}/>
         </PageContainer>
     </form>
   );
