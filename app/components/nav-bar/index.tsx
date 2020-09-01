@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import MyOkayCash from '../icons/myOkayCash';
 import { UserContext, defaultUser } from 'helpers/userContext';
+import { useLocation } from 'react-router-dom'
 
 
 import { Container, Button } from './styles';
@@ -13,9 +14,15 @@ const NavBar = () => {
 
   const reset = async () => {
     const { reset } = await API.cleareDB();
-    
     setContext(defaultUser);
-    history.push('/');
+
+    let path = window.location.href;
+
+    if(path.includes('linking-success') || path.includes('login') || path.includes('dashboard')){
+      history.push('/');
+    } else{
+      location.reload();
+    }  
   }
 
   return (
