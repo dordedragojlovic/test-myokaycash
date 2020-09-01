@@ -37,12 +37,15 @@ function useForm(configuration: {
 
 function LoginPage() {
   const [code, setCode] = useState('');
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
 
   const form = useForm({
     initialValues: { username: '', password: '' },
     onSubmit: async (values) => {
       try {
+
+        setLoading(true);
         const { code } = await dataProvider.login(values);
 
         setCode(code);
@@ -50,6 +53,7 @@ function LoginPage() {
         const observable = dataProvider.userValid(values.username);
         observable.subscribe((value) => {
           if(value){
+            setLoading(false);
             history.push('/dashboard');
           }
         });
@@ -65,7 +69,7 @@ function LoginPage() {
    }
 
   return (
-    <LoginView form={form} />
+    <LoginView form={form} loading={loading}/>
   );
 }
 

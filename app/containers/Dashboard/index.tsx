@@ -42,8 +42,8 @@ function Dashboard() {
                 <h1>€16,234.56</h1>
             </Balance>
             <Actions>
-                <StyledButton theme={ {color:"#1F2A3F", width:"170px", height:"45px", font:"0.9rem" }} text="New Payment" submit={false} />
-                <StyledButton theme={ {color:"#1F2A3F", width:"170px", height:"45px", font:"0.9rem" }} text="Make Transfer" submit={false} />
+                <StyledButton theme={ {color:"#1F2A3F", width:"170px", height:"45px", font:"0.9rem" }} text="New Payment" submit={false} loading={false} />
+                <StyledButton theme={ {color:"#1F2A3F", width:"170px", height:"45px", font:"0.9rem" }} text="Make Transfer" submit={false} loading={false} />
             </Actions>
         </Section>
         <Table title="All Accounts" columns={tableData.column} rows={tableData.row}/>

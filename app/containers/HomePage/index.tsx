@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useContext } from 'react';
+import React, { ChangeEvent, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { LoginInfo, User } from 'types';
@@ -36,16 +36,19 @@ function useForm(configuration: {
 
 function HomePage() {
   const {value, setContext} = useContext(UserContext);
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
 
   const form = useForm({
     initialValues: { username: '', password: '' },
     onSubmit: async (values) => {
       try {
+        setLoading(true);
         const { code, qrCode, cardInfo } = await dataProvider.createUser(values);
         const observable = dataProvider.userLinked(values.username);
         observable.subscribe((value) => {
           if(value){
+            setLoading(false);
             history.push('/linking-success');
           }
         });
@@ -69,7 +72,7 @@ function HomePage() {
   return <LinkingView user={value}/>;
  }
  
-  return <HomePageView form={form} />;
+  return <HomePageView form={form} loading={loading}/>;
 }
 
 export default HomePage

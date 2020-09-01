@@ -2,10 +2,10 @@ import { FormStateHandler } from 'types';
 import React from 'react';
 import FormPage from 'components/form-page';
 
-function LoginView({ form }: { form: FormStateHandler }) {
+function LoginView({ form, loading }: { form: FormStateHandler, loading:boolean }) {
 
   return (
-    <FormPage form={form} text="Enter" buttonText="ENTER"  />
+    <FormPage form={form} text="Enter" buttonText="ENTER" loading={loading} />
   );
 }
 
