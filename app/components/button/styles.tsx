@@ -8,6 +8,7 @@ export const ButtonContainer = styled.div`
     display: flex;
     justify-content: center;
     cursor: pointer;
+    margin: 0 3px;
 
     button{
         font-weight: 900;

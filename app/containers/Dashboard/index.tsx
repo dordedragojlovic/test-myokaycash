@@ -1,9 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, ChangeEvent } from 'react';
 import { UserContext } from 'helpers/userContext';
 
 import Table from 'components/table';
 import ActivityTable from 'components/activity-table';
 import StyledButton from 'components/button';
+import { useFormik } from 'formik';
+import { FormDeviceStateHandler } from 'types';
+import { DeviceInfo } from 'types';
 import {
     PageContainer,
     Header,
@@ -15,12 +18,75 @@ import {
     ExpensesReport,
     DetailsSection
 } from './styles';
-import { tableData, recentActivitydata } from './data-provider';
+import { tableData, recentActivitydata, deviceData } from './data-provider';
 import LineChart from 'components/line-chart';
 import CopyToClipboard from 'components/copy-to-clipboard';
+import Popup from '../../components/popup';
+
+function deviceForm(configuration: {
+    initialValues: DeviceInfo;
+    onSubmit: (values: DeviceInfo) => void;
+  }): FormDeviceStateHandler {
+    const form = useFormik<DeviceInfo>({
+      ...configuration,
+      enableReinitialize: true,
+    });
+  
+    const onDeviceIdChange = (event: ChangeEvent<HTMLInputElement>) => {
+      form.setFieldValue('deviceId', event.target.value);
+    };
+    const onCertificateChange = (event: ChangeEvent<HTMLInputElement>) => {
+      form.setFieldValue('certificate', event.target.value);
+    };
+  
+    return {
+      deviceId: form.values.deviceId,
+      certificate: form.values.certificate,
+      handleSubmit: form.handleSubmit,
+      onCertificateChange,
+      onDeviceIdChange,
+    };
+  }
+
 
 function Dashboard() {
     const {value, setContext} = useContext(UserContext);
+    const [loading, setLoading] = useState(false);
+    const [showPopup, setShowPopup] = useState(false);
+
+    const form = deviceForm({
+        initialValues: { deviceId: '', certificate: '' },
+        onSubmit: async (values) => {
+          try {
+            setLoading(true);
+            console.log("radi za sad")
+    
+            // const userData: User = {
+            //   name: values.username,
+            //   code,
+            //   qrCode,
+            //   cardInfo
+            // }
+            
+            // setContext(userData);
+           
+          } catch (error) {
+            console.log('Something went wrong...Error message: ', error);
+          }
+        },
+      });
+
+    function togglePopup() {
+        setShowPopup(!showPopup)
+      }
+    
+    function closePopup(e) {
+        e.stopPropagation()
+        const component = e.target ? e.target.className : '';
+        component.includes('PopupWrapper')
+          ? setShowPopup(false)
+          : null;
+      }
 
   return (
     <PageContainer>
@@ -44,9 +110,19 @@ function Dashboard() {
             <Actions>
                 <StyledButton theme={ {color:"#1F2A3F", width:"170px", height:"45px", font:"0.9rem" }} text="New Payment" submit={false} loading={false} />
                 <StyledButton theme={ {color:"#1F2A3F", width:"170px", height:"45px", font:"0.9rem" }} text="Make Transfer" submit={false} loading={false} />
+                {showPopup ?
+                    <Popup
+                        form={form}
+                        closePopup={togglePopup}
+                        onClickClose={closePopup}
+                        loading={loading}
+                    />
+                    : null
+                }
             </Actions>
         </Section>
-        <Table title="All Accounts" columns={tableData.column} rows={tableData.row}/>
+        <Table title="All Accounts" columns={tableData.column} rows={tableData.row} button={false} onClick={togglePopup}/>
+        <Table title="Trusted IoT Devices" columns={deviceData.column} rows={deviceData.row} button={true} onClick={togglePopup}/>
         <DetailsSection>
             <ActivityTable data={recentActivitydata}/>
             <ExpensesReport>

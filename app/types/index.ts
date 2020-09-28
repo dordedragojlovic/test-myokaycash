@@ -36,9 +36,22 @@ export type FormStateHandler = {
   onUsernameChange: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
+export type FormDeviceStateHandler = {
+  deviceId: string;
+  certificate: string;
+  handleSubmit: () => void;
+  onDeviceIdChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onCertificateChange: (event: ChangeEvent<HTMLInputElement>) => void;
+};
+
 export interface LoginInfo {
   username: string;
   password: string;
+};
+
+export interface DeviceInfo {
+  deviceId: string;
+  certificate: string;
 };
 
 export interface User {

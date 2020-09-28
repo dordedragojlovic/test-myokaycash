@@ -44,3 +44,10 @@ export const tableData = {
             [ 'Savings', '3142367***', 'CARTER', 'Deactivated', 'EURO', '‎€56.23',]
          ]
 }
+
+export const deviceData = {
+    column: [ 'Type', 'ID', 'Linked', 'Status'],
+    row: [  [ '1-Click device', 'JK25C7D8S4CC', 'True','Active'],
+            [ 'Smart dash cam', 'LG35IF64FJS45', 'False','Deactivated']
+         ]
+}
