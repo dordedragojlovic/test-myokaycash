@@ -14,7 +14,6 @@
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
-      "npm run fix",
       "git add --force"
     ],
     "*.{md,json}": [

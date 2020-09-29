@@ -18,7 +18,7 @@ import {
     ExpensesReport,
     DetailsSection
 } from './styles';
-import { tableData, recentActivitydata, deviceData } from './data-provider';
+import dataProvider from './data-provider';
 import LineChart from 'components/line-chart';
 import CopyToClipboard from 'components/copy-to-clipboard';
 import Popup from '../../components/popup';
@@ -84,7 +84,7 @@ function Dashboard() {
         e.stopPropagation()
         const component = e.target ? e.target.className : '';
         component.includes('PopupWrapper')
-          ? setShowPopup(false)
+          ? setShowPopup(!showPopup)
           : null;
       }
 
@@ -121,10 +121,10 @@ function Dashboard() {
                 }
             </Actions>
         </Section>
-        <Table title="All Accounts" columns={tableData.column} rows={tableData.row} button={false} onClick={togglePopup}/>
-        <Table title="Trusted IoT Devices" columns={deviceData.column} rows={deviceData.row} button={true} onClick={togglePopup}/>
+        <Table title="All Accounts" columns={dataProvider.tableData.column} rows={dataProvider.tableData.row} button={false} onClick={togglePopup}/>
+        <Table title="Trusted IoT Devices" columns={dataProvider.deviceData.column} rows={dataProvider.deviceData.row} button={true} onClick={togglePopup}/>
         <DetailsSection>
-            <ActivityTable data={recentActivitydata}/>
+            <ActivityTable data={dataProvider.recentActivitydata}/>
             <ExpensesReport>
                 <LineChart/>
             </ExpensesReport>

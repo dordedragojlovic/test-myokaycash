@@ -107,12 +107,35 @@ function getValidityObservable(name: string): Observable<boolean> {
   return Observable.from(fetchResultObservable).map((value) => value.data?.userLoginConfirmSuccessful);
 }
 
+async function addDevice(
+  values
+): Promise<{ code: string; }> {
+  return (
+    await client.mutate({
+      mutation: gql`
+        mutation addDevice ($input: AddDeviceInput! ){
+          addDevice(input: $input){
+            code
+          }
+        }
+      `,
+      variables: {
+        input: {
+          username: values.username,
+          certificateId: values.certificateId
+        }
+      },
+    })
+  ).data.logIn;
+}
+
 const API = {
   createUser,
   login,
   getLinkingObservable,
   getValidityObservable,
-  cleareDB
+  cleareDB,
+  addDevice
 };
 
 export default API;
