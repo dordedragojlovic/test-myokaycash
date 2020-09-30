@@ -108,8 +108,8 @@ function getValidityObservable(name: string): Observable<boolean> {
 }
 
 async function addDevice(
-  values
-): Promise<{ code: string; }> {
+  deviceInfo, username
+): Promise<{ certificateId: string; id: string; }> {
   return (
     await client.mutate({
       mutation: gql`
@@ -121,12 +121,13 @@ async function addDevice(
       `,
       variables: {
         input: {
-          username: values.username,
-          certificateId: values.certificateId
+          username: username,
+          certificateId: deviceInfo.certificateId,
+          id: deviceInfo.id
         }
       },
     })
-  ).data.logIn;
+  ).data.addDevice;
 }
 
 const API = {

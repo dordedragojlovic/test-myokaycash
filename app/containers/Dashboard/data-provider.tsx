@@ -2,8 +2,8 @@ import { DeviceInfo } from 'types';
 import API from 'helpers/api';
 import { Observable } from 'apollo-link';
 
-function addDevice(deviceInfo: DeviceInfo): Promise<{ code: string; qrCode: string;  cardInfo: { number: string; cvc: string; validity: string} }> {
-  return API.createUser(deviceInfo);
+function addDevice(deviceInfo: DeviceInfo, username: string): Promise<{ certificateId: string; id: string; }> {
+  return API.addDevice(deviceInfo, username);
 }
 
 const recentActivitydata = [

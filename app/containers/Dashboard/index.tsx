@@ -59,7 +59,8 @@ function Dashboard() {
         onSubmit: async (values) => {
           try {
             setLoading(true);
-            console.log("radi za sad")
+            console.log("radi za sad", value);
+            //const { id, certificateId } = await dataProvider.addDevice(values, value.name );
     
             // const userData: User = {
             //   name: values.username,
