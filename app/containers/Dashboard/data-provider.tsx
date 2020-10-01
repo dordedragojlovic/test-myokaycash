@@ -2,7 +2,7 @@ import { DeviceInfo } from 'types';
 import API from 'helpers/api';
 import { Observable } from 'apollo-link';
 
-function addDevice(deviceInfo: DeviceInfo, username: string): Promise<{ certificateId: string; id: string; }> {
+function addDevice(deviceInfo: DeviceInfo, username: string): Promise<{ id: string; certificateId: string; }> {
   return API.addDevice(deviceInfo, username);
 }
 

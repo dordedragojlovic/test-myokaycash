@@ -6,7 +6,7 @@ import ActivityTable from 'components/activity-table';
 import StyledButton from 'components/button';
 import { useFormik } from 'formik';
 import { FormDeviceStateHandler } from 'types';
-import { DeviceInfo } from 'types';
+import { DeviceInfo, User } from 'types';
 import {
     PageContainer,
     Header,
@@ -33,15 +33,15 @@ function deviceForm(configuration: {
     });
   
     const onDeviceIdChange = (event: ChangeEvent<HTMLInputElement>) => {
-      form.setFieldValue('deviceId', event.target.value);
+      form.setFieldValue('id', event.target.value);
     };
     const onCertificateChange = (event: ChangeEvent<HTMLInputElement>) => {
-      form.setFieldValue('certificate', event.target.value);
+      form.setFieldValue('certificateId', event.target.value);
     };
   
     return {
-      deviceId: form.values.deviceId,
-      certificate: form.values.certificate,
+      id: form.values.id,
+      certificateId: form.values.certificateId,
       handleSubmit: form.handleSubmit,
       onCertificateChange,
       onDeviceIdChange,
@@ -55,38 +55,42 @@ function Dashboard() {
     const [showPopup, setShowPopup] = useState(false);
 
     const form = deviceForm({
-        initialValues: { deviceId: '', certificate: '' },
+        initialValues: { id: '', certificateId: '' },
         onSubmit: async (values) => {
           try {
             setLoading(true);
-            console.log("radi za sad", value);
-            //const { id, certificateId } = await dataProvider.addDevice(values, value.name );
-    
-            // const userData: User = {
-            //   name: values.username,
-            //   code,
-            //   qrCode,
-            //   cardInfo
-            // }
-            
-            // setContext(userData);
-           
+            const { certificateId, id  } = await dataProvider.addDevice(values, value.name );
+
+            const device: DeviceInfo = {
+              id,
+              certificateId
+            }
+            const userData: User = {
+              ...value
+            }
+            userData.devices.push(device);
+
+            setContext(userData);
+            closePopup()
+
           } catch (error) {
             console.log('Something went wrong...Error message: ', error);
           }
         },
       });
 
-    function togglePopup() {
+    function closePopup() {
         setShowPopup(!showPopup)
       }
     
-    function closePopup(e) {
+    function closeOnOutOfFocuse(e) {
         e.stopPropagation()
         const component = e.target ? e.target.className : '';
-        component.includes('PopupWrapper')
-          ? setShowPopup(!showPopup)
-          : null;
+        if ( typeof component === 'string'){
+          component.includes('PopupWrapper')
+            ? setShowPopup(!showPopup)
+            : null;
+        }
       }
 
   return (
@@ -106,7 +110,7 @@ function Dashboard() {
         <Section>
             <Balance>
                 <h4>Total Balance</h4>
-                <h1>€16,234.56</h1>
+                <h1>€{value.balance}</h1>
             </Balance>
             <Actions>
                 <StyledButton theme={ {color:"#1F2A3F", width:"170px", height:"45px", font:"0.9rem" }} text="New Payment" submit={false} loading={false} />
@@ -114,16 +118,16 @@ function Dashboard() {
                 {showPopup ?
                     <Popup
                         form={form}
-                        closePopup={togglePopup}
-                        onClickClose={closePopup}
+                        closePopup={closePopup}
+                        onClickClose={closeOnOutOfFocuse}
                         loading={loading}
                     />
                     : null
                 }
             </Actions>
         </Section>
-        <Table title="All Accounts" columns={dataProvider.tableData.column} rows={dataProvider.tableData.row} button={false} onClick={togglePopup}/>
-        <Table title="Trusted IoT Devices" columns={dataProvider.deviceData.column} rows={dataProvider.deviceData.row} button={true} onClick={togglePopup}/>
+        <Table title="All Accounts" columns={dataProvider.tableData.column} rows={dataProvider.tableData.row} button={false} onClick={closePopup}/>
+        <Table title="Trusted IoT Devices" columns={dataProvider.deviceData.column} rows={dataProvider.deviceData.row} button={true} onClick={closePopup}/>
         <DetailsSection>
             <ActivityTable data={dataProvider.recentActivitydata}/>
             <ExpensesReport>

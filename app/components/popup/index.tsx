@@ -23,7 +23,7 @@ function Popup({ form, loading, closePopup, onClickClose }: { form: FormDeviceSt
                       <div>
                         <h3>Device ID</h3>
                         <input
-                            value={form.deviceId}
+                            value={form.id}
                             onChange={form.onDeviceIdChange}
                             />
                       </div>
@@ -33,7 +33,7 @@ function Popup({ form, loading, closePopup, onClickClose }: { form: FormDeviceSt
                       <div>
                         <h3>Device certificate</h3>
                         <input
-                            value={form.certificate}
+                            value={form.certificateId}
                             onChange={form.onCertificateChange}
                         />
                         </div>

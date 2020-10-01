@@ -107,23 +107,53 @@ function getValidityObservable(name: string): Observable<boolean> {
   return Observable.from(fetchResultObservable).map((value) => value.data?.userLoginConfirmSuccessful);
 }
 
+async function getUser(
+  values
+): Promise<{ cardInfo: { number: string; cvc: string; validity: string}; username: string; balance: number; devices: [{ id:string; certificateId: string}] }> {
+  return (
+    await client.query({
+      query: gql`
+        query account ($username: String! ){
+          account(username: $username){
+            cardInfo{
+              number
+              cvc
+              validity
+            }
+            username
+            balance
+            devices{
+              id
+              certificateId
+            }
+          }
+        }
+      `,
+      variables: {
+          username: values
+      },
+    })
+  ).data.account;
+}
+
 async function addDevice(
   deviceInfo, username
-): Promise<{ certificateId: string; id: string; }> {
+): Promise<{ id: string; certificateId: string; }> {
   return (
     await client.mutate({
       mutation: gql`
         mutation addDevice ($input: AddDeviceInput! ){
           addDevice(input: $input){
-            code
+            id
+            certificateId
           }
         }
       `,
       variables: {
         input: {
-          username: username,
+          id: deviceInfo.id,
           certificateId: deviceInfo.certificateId,
-          id: deviceInfo.id
+          username: username
         }
       },
     })
@@ -136,7 +166,8 @@ const API = {
   getLinkingObservable,
   getValidityObservable,
   cleareDB,
-  addDevice
+  addDevice,
+  getUser
 };
 
 export default API;

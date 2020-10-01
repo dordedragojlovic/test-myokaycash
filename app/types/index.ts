@@ -37,8 +37,8 @@ export type FormStateHandler = {
 };
 
 export type FormDeviceStateHandler = {
-  deviceId: string;
-  certificate: string;
+  id: string;
+  certificateId: string;
   handleSubmit: () => void;
   onDeviceIdChange: (event: ChangeEvent<HTMLInputElement>) => void;
   onCertificateChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -50,15 +50,19 @@ export interface LoginInfo {
 };
 
 export interface DeviceInfo {
-  deviceId: string;
-  certificate: string;
+  id: string;
+  certificateId: string;
 };
+
+interface DeviceInfoArray extends Array<DeviceInfo>{}
 
 export interface User {
   name: string;
   code: string;
   qrCode: string;
   cardInfo: CardInfo;
+  balance: number;
+  devices: DeviceInfoArray;
 }
 interface CardInfo {
   number: string;
