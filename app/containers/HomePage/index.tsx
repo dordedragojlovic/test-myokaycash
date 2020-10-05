@@ -6,8 +6,8 @@ import { FormStateHandler } from 'types'
 import dataProvider from './data-provider';
 import HomePageView from './home-page-view';
 import LinkingView from './linking-view';
-import { UserContext } from 'helpers/userContext';
-import onError from 'components/warning/helpers';
+import { UserContext, defaultError } from 'helpers/userContext';
+import onError from 'components/warning/on-error';
 
 function useForm(configuration: {
   initialValues: LoginInfo;
@@ -38,12 +38,11 @@ function useForm(configuration: {
 function HomePage() {
   const {value, setContext} = useContext(UserContext);
   const [loading, setLoading] = useState(false);
-  const [warning, setWarning] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
+  const [error, setError] = useState(defaultError);
   const history = useHistory();
 
   function closeWarning(){
-    setWarning(false);
+    setError(defaultError);
   }
 
   const form = useForm({
@@ -71,7 +70,7 @@ function HomePage() {
        
       } catch (error) {
           console.log('Something went wrong...Error message: ', error);
-          onError(error, values.username, setWarning, setErrorMsg);
+          onError(error, setError, setLoading);
       }
     },
   });
@@ -80,7 +79,7 @@ function HomePage() {
   return <LinkingView user={value}/>;
  }
  
-  return <HomePageView form={form} loading={loading} showWarning={warning} closeWarning={closeWarning} errorMessage={errorMsg}/>;
+  return <HomePageView form={form} loading={loading} showWarning={error.warning} closeWarning={closeWarning} errorMessage={error.errorMsg}/>;
 }
 
 export default HomePage
