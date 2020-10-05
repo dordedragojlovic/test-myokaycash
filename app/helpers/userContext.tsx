@@ -16,6 +16,12 @@ export const defaultUser: User = {
     validity: '',
   },
 };
+
+export const defaultError = {
+  warning: false,
+  errorMsg: ''
+};
+
 export const UserContext = createContext<ContextModel>({
   value: defaultUser,
   setContext: () => {},

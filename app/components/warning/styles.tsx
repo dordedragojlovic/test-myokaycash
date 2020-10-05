@@ -24,8 +24,6 @@ export const PopupWindow = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: fit-content;
-  background: white;
   border-radius: 5px;
   width: 520px;
   height: 70px;

@@ -7,7 +7,8 @@ import SecretCodeView from './secret-code-view';
 import { useFormik } from 'formik';
 import dataProvider from './data-provider';
 import { LoginInfo } from 'types';
-import onError from 'components/warning/helpers';
+import onError from 'components/warning/on-error';
+import { defaultError } from 'helpers/userContext';
 
 function useForm(configuration: {
   initialValues: LoginInfo;
@@ -39,12 +40,11 @@ function useForm(configuration: {
 function LoginPage() {
   const [code, setCode] = useState('');
   const [loading, setLoading] = useState(false);
-  const [warning, setWarning] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
+  const [error, setError] = useState(defaultError);
   const history = useHistory();
 
   function closeWarning(){
-    setWarning(false);
+    setError(defaultError);
   }
 
   const form = useForm({
@@ -67,7 +67,7 @@ function LoginPage() {
       
       } catch (error) {
         console.log('Something went wrong...', error);
-        onError(error, values.username, setWarning, setErrorMsg);
+        onError(error, setError, setLoading);
       }
     },
   });
@@ -77,7 +77,7 @@ function LoginPage() {
    }
 
   return (
-    <LoginView form={form} loading={loading} showWarning={warning} closeWarning={closeWarning} errorMessage={errorMsg}/>
+    <LoginView form={form} loading={loading} showWarning={error.warning} closeWarning={closeWarning} errorMessage={error.errorMsg}/>
   );
 }
 
