@@ -1,5 +1,5 @@
 import { createContext, Dispatch, SetStateAction } from 'react';
-import { User } from 'types'
+import { User } from 'types';
 
 interface ContextModel {
   value: User;
@@ -15,11 +15,6 @@ export const defaultUser: User = {
     cvc: '',
     validity: '',
   },
-};
-
-export const defaultError = {
-  warning: false,
-  errorMsg: ''
 };
 
 export const UserContext = createContext<ContextModel>({

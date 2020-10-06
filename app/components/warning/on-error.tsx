@@ -2,20 +2,15 @@ function clearAlert(timer) {
   clearTimeout(timer);
 }
 
-function onError( errorObj, setError, setLoading){
-  const err = String(errorObj);
-  const message = err.split(':');
-  const error = {
-    warning: true,
-    errorMsg: message[2]
-  }
+function onError(errorObj, setError, setLoading) {
+  const message = errorObj.split('GraphQL error:').join('');
 
-  setError(error)
+  setError(message);
 
-  const timer = setTimeout( () =>{
-    setError({warning: false});
-    setLoading(false)
-    clearAlert( timer);
+  const timer = setTimeout(() => {
+    setError('');
+    setLoading(false);
+    clearAlert(timer);
   }, 2700);
 }
 
