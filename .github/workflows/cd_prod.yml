@@ -1,0 +1,38 @@
+name: Continuous Deployment
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    name: Production Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: npm install
+        run: npm install
+      - name: npm build
+        run: npm run build
+      - uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl private --follow-symlinks --delete
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_S3_BUCKET: myokaycash.okaythis.com
+          AWS_REGION: 'eu-central-1'
+          SOURCE_DIR: 'build'
+  invalidate_cache:
+    name: Invalidate Cache
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: awact/cloudfront-action@master
+        env:
+          AWS_REGION: 'eu-central-1'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          DISTRIBUTION_ID: ${{ secrets.AWS_DISTRIBUTION_ID }}
