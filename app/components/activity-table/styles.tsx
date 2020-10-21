@@ -64,6 +64,10 @@ export const RecentActivity = styled.div`
   ${responsive.sm} {
       width: 100%;
     }
+    
+  ${responsive.md} {
+    width: 100%;
+  }
 
   ${responsive.mdpi} {
     padding: 20px 30px 10px 30px;
