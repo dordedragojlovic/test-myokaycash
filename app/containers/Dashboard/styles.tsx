@@ -95,8 +95,15 @@ export const Actions = styled.div`
   ${responsive.sm} {
     width: 57%;
   }
+
+  ${responsive.md} {
+    width: 46%;
+  }
   ${responsive.mdpi} {
-      width: 38%;
+      width: 37%;
+  }
+  ${responsive.mac} {
+      width: 32%;
   }
   ${responsive.iPadPro} {
     width: 53%;
@@ -112,6 +119,11 @@ export const ExpensesReport = styled.div`
       margin-top: 30px;
     }
 
+    ${responsive.md} {
+      width: 100%;
+      margin-top: 30px;
+    }
+
     ${responsive.iPadPro} {
       width: 100%;
       margin-top: 30px;
@@ -123,6 +135,10 @@ export const DetailsSection = styled.div`
     justify-content: space-between;
 
     ${responsive.sm} {
+      flex-direction: column;
+    }
+
+    ${responsive.md} {
       flex-direction: column;
     }
 
