@@ -93,7 +93,7 @@ export const Actions = styled.div`
   align-items: center;
 
   ${responsive.sm} {
-    width: 57%;
+    width: 55%;
   }
 
   ${responsive.md} {

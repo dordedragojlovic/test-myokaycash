@@ -1,4 +1,12 @@
-export const recentActivitydata = [
+import { DeviceInfo } from 'types';
+import API from 'helpers/api';
+import { Observable } from 'apollo-link';
+
+function addDevice(deviceInfo: DeviceInfo, username: string): Promise<{ id: string; certificateId: string; }> {
+  return API.addDevice(deviceInfo, username);
+}
+
+const recentActivitydata = [
     {   
         id: 131,
         date: '20',
@@ -37,10 +45,26 @@ export const recentActivitydata = [
     }
 ];
 
-export const tableData = {
+const tableData = {
     column: [ 'Type', 'Account', 'Recipient', 'Status', 'Currency', 'Balance'],
     row: [  [ 'Checking', '1234567***', 'SMITH', 'Active', 'EURO', '‎€6,234.56'],
             [ 'Savings', '5389215***', 'DOE', 'Active', 'EURO', '‎€16,234.56'],
             [ 'Savings', '3142367***', 'CARTER', 'Deactivated', 'EURO', '‎€56.23',]
          ]
 }
+
+const deviceData = {
+    column: [ 'Type', 'ID', 'Linked', 'Status'],
+    row: [  [ '1-Click device', 'JK25C7D8S4CC', 'True','Active'],
+            [ 'Smart dash cam', 'LG35IF64FJS45', 'False','Deactivated']
+         ]
+}
+
+const dataProvider = {
+  addDevice,
+  recentActivitydata,
+  tableData,
+  deviceData
+};
+
+export default dataProvider;

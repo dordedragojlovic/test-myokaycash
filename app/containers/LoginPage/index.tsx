@@ -1,4 +1,5 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useContext, useState } from 'react';
+import { UserContext } from 'helpers/userContext';
 
 import { FormStateHandler } from 'types';
 import { useHistory } from 'react-router-dom';
@@ -6,8 +7,8 @@ import LoginView from './view';
 import SecretCodeView from './secret-code-view';
 import { useFormik } from 'formik';
 import dataProvider from './data-provider';
-import { LoginInfo } from 'types';
 import onError from 'components/warning/on-error';
+import { LoginInfo, User } from 'types';
 
 function useForm(configuration: {
   initialValues: LoginInfo;
@@ -35,13 +36,34 @@ function useForm(configuration: {
 }
 
 function LoginPage() {
-  const [code, setCode] = useState('');
+  const {value, setContext} = useContext(UserContext);
+  const [secretCode, setSecretCode] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const history = useHistory();
 
   function closeWarning() {
     setError('');
+  }
+  
+  const getUserData = async ( username ) =>{
+    try {
+      const { cardInfo, balance, devices } = await dataProvider.getUser(username);
+
+      const userData: User = {
+        ...value
+      }
+
+      userData.cardInfo = cardInfo;
+      userData.balance = balance;
+      userData.devices = devices;
+      userData.name = username;
+    
+      setContext(userData);
+      
+    } catch (err) {
+      console.log('Something went wrong...Error message: ', err);
+    }
   }
 
   const form = useForm({
@@ -50,16 +72,17 @@ function LoginPage() {
       try {
         setLoading(true);
         const { code } = await dataProvider.login(values);
-
-        setCode(code);
+        setSecretCode(code);
 
         const observable = dataProvider.userValid(values.username);
-        observable.subscribe(value => {
-          if (value) {
+        observable.subscribe((res) => {
+          if(res){
             setLoading(false);
-            history.push('/dashboard');
+            getUserData(values.username);
           }
-        });
+            history.push('/dashboard');
+          });
+      
       } catch (error) {
         console.log('Something went wrong...', error);
         onError(error.message, setError, setLoading);
@@ -67,9 +90,9 @@ function LoginPage() {
     },
   });
 
-  if (code !== '') {
-    return <SecretCodeView code={code} />;
-  }
+  if(secretCode !== ''){
+    return <SecretCodeView secretCode={secretCode}/>;
+   }
 
   return (
     <LoginView

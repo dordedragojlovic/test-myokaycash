@@ -45,3 +45,31 @@ export const Title = styled.h1`
     }
 `;
 
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 10px 0;
+  padding-top: 20px;
+  border-top: 1px solid;
+`;
+
+export const IconButton = styled.button`
+    display: flex;
+    border: 0;
+    background: #1F2A3F;
+    color: white;
+    border-radius: 41px;
+    height: 45px;
+    width: 170px;
+    font-size: 0.9rem;
+    font-weight: 900;
+    line-height: 29px;
+    color: #FFFFFF;
+    justify-content: space-evenly;
+    align-items: center;
+
+    svg{
+      height: 25px;
+      width: 25px;
+    }
+`;

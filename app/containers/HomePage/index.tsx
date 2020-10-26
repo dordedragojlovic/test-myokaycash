@@ -61,12 +61,14 @@ function HomePage() {
         });
 
         const userData: User = {
-          name: values.username,
-          code,
-          qrCode,
-          cardInfo,
-        };
+          ...value
+        }
+        userData.name = values.username;
+        userData.code = code;
+        userData.qrCode = qrCode;
+        userData.cardInfo = cardInfo;
 
+        
         setContext(userData);
       } catch (error) {
         // console.log('Something went wrong...Error message: ', error);

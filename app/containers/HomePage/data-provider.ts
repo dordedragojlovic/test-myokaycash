@@ -1,4 +1,4 @@
-import { LoginInfo, User } from 'types';
+import { LoginInfo } from 'types';
 import API from 'helpers/api';
 import { Observable } from 'apollo-link';
 
@@ -10,21 +10,9 @@ function userLinked(name: string): Observable<boolean> {
   return API.getLinkingObservable(name);
 }
 
-const defaultUser: User = {
-    name: '', 
-    code: '',
-    qrCode: '',
-    cardInfo: { 
-      number: '',
-      cvc: '',
-      validity: ''
-      }
-};
-
 const dataProvider = {
   createUser,
-  userLinked,
-  defaultUser
+  userLinked
 };
 
 export default dataProvider;

@@ -10,9 +10,14 @@ function userValid(name: string): Observable<boolean> {
   return API.getValidityObservable(name);
 }
 
+function getUser(username: string): Promise<{ cardInfo: { number: string; cvc: string; validity: string}; username: string; balance: number; devices: [{ id:string; certificateId: string}]}> {
+  return API.getUser(username);
+}
+
 const dataProvider = {
   login,
-  userValid
+  userValid,
+  getUser
 };
 
 export default dataProvider;
