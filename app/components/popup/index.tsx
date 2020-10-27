@@ -1,46 +1,19 @@
 import React from 'react';
-import { PopupWindow, PopupWrapper, H1, PopupHeader, InputContainer, InputSection } from './styles';
-import { FormDeviceStateHandler } from 'types';
-import StyledButton from 'components/button';
-import Barcode from 'components/icons/barcode';
-import IoTDevice from 'components/icons/iotDevice';
-import CancelIcon from 'components/icons/cancel'
+import { PopupWindow, PopupWrapper, H1, PopupHeader} from './styles';
+import CancelIcon from 'components/icons/cancel';
 
-function Popup({ form, loading, closePopup, onClickClose }: { form: FormDeviceStateHandler, loading:boolean, closePopup, onClickClose }) {
+function Popup({ body, header, form, loading, closePopup, onClickClose }: { body, header:string, form, loading:boolean, closePopup, onClickClose }) {
+    let Body = body;
   return (
     <PopupWrapper onClick={onClickClose}>
       <PopupWindow>
-      <PopupHeader>
-          <H1>Add trusted device</H1>
-          <button type="button" onClick={closePopup}>
-          <CancelIcon/>
-          </button>
+        <PopupHeader>
+            <H1>{header}</H1>
+            <button type="button" onClick={closePopup}>
+            <CancelIcon/>
+            </button>
         </PopupHeader>
-        <form onSubmit={form.handleSubmit}>
-                <InputContainer>
-                    <InputSection>
-                      <IoTDevice/>
-                      <div>
-                        <h3>Device ID</h3>
-                        <input
-                            value={form.id}
-                            onChange={form.onDeviceIdChange}
-                            />
-                      </div>
-                    </InputSection>
-                    <InputSection>
-                      <Barcode/>
-                      <div>
-                        <h3>Device certificate</h3>
-                        <input
-                            value={form.certificateId}
-                            onChange={form.onCertificateChange}
-                        />
-                        </div>
-                    </InputSection>
-                </InputContainer>
-            <StyledButton theme={ {color:"#66C664", width:"233px", height:"58px", font:"25px" }} text={"Add"} submit={true} loading={loading}/>
-    </form>
+        <Body form={form} loading={loading}/>
       </PopupWindow>
     </PopupWrapper>
   );

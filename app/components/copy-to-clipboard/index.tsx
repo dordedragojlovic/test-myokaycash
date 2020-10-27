@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react';
 
 import { PageContainer } from './styles';
+import IconButton from 'components/icon-button';
+import Copy from 'components/icons/copy';
 
 function CopyToClipboard( {text} : {text: string}) {
     const [copySuccess, setCopySuccess] = useState('Copy');
@@ -11,7 +13,7 @@ function CopyToClipboard( {text} : {text: string}) {
 
         document.execCommand('copy');
         e.target.focus();
-        setCopySuccess('Copied !');
+        setCopySuccess('Copied');
     };
 
   return (
@@ -21,9 +23,7 @@ function CopyToClipboard( {text} : {text: string}) {
         </form>
         {
         document.queryCommandSupported('copy') &&
-            <div>
-                <button onClick={copyToClipboard}>{copySuccess}</button>
-            </div>
+            <IconButton text={copySuccess} icon={Copy} onClick={copyToClipboard}/>
         }
     </PageContainer>
   );

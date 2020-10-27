@@ -71,7 +71,6 @@ function HomePage() {
         
         setContext(userData);
       } catch (error) {
-        // console.log('Something went wrong...Error message: ', error);
         onError(error.message, setError, setLoading);
       }
     },

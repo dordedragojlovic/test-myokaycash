@@ -30,7 +30,7 @@ export const PopupWindow = styled.div`
   background: white;
   border-radius: 31px;
   width: 860px;
-  height: 580px;
+  height: 500px;
 
   form{
     width: 100%;

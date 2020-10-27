@@ -8,7 +8,7 @@ export const PageContainer = styled.div`
         
     textarea{
         border: 0;
-        font-size: 22px;
+        font-size: 20px;
         resize: none;
         height: 30px;
         width: 200px;
@@ -16,19 +16,4 @@ export const PageContainer = styled.div`
         font-family: inherit;
     }
 
-    button{
-        background: #1F2A3F;
-        border-radius: 41px;
-        height: 32px;
-        width: 110px;
-        text-align: center;
-        cursor: pointer;
-        font-weight: 900;
-        font-size: 16px;
-        line-height: 29px;
-        color: #FFFFFF;
-        border: 0;
-        cursor: pointer;
-        margin: 3px 5px 0 20px
-    }
 `;

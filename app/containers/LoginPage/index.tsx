@@ -48,7 +48,7 @@ function LoginPage() {
   
   const getUserData = async ( username ) =>{
     try {
-      const { cardInfo, balance, devices } = await dataProvider.getUser(username);
+      const { cardInfo, balance } = await dataProvider.getUser(username);
 
       const userData: User = {
         ...value
@@ -56,9 +56,8 @@ function LoginPage() {
 
       userData.cardInfo = cardInfo;
       userData.balance = balance;
-      userData.devices = devices;
       userData.name = username;
-    
+  
       setContext(userData);
       
     } catch (err) {
@@ -79,8 +78,8 @@ function LoginPage() {
           if(res){
             setLoading(false);
             getUserData(values.username);
-          }
             history.push('/dashboard');
+          }
           });
       
       } catch (error) {

@@ -1,12 +1,17 @@
 import React, { useContext, useState, ChangeEvent } from 'react';
 import { UserContext } from 'helpers/userContext';
 
+import AddIcon from 'components/icons/add';
+import CreditCard from 'components/icons/creditCard';
+import Phone from 'components/icons/phone';
+import MoneBag from 'components/icons/money';
+
 import Table from 'components/table';
 import ActivityTable from 'components/activity-table';
 import StyledButton from 'components/button';
+import IconButton from 'components/icon-button';
 import { useFormik } from 'formik';
-import { FormDeviceStateHandler } from 'types';
-import { DeviceInfo, User } from 'types';
+import { User, PhoneNumber, FormPhoneStateHandler } from 'types';
 import {
     PageContainer,
     Header,
@@ -21,30 +26,26 @@ import {
 import dataProvider from './data-provider';
 import LineChart from 'components/line-chart';
 import CopyToClipboard from 'components/copy-to-clipboard';
-import Popup from '../../components/popup';
+import Popup from 'components/popup';
+import PhoneNumberForm from 'components/popup/phoneNumber';
 
-function deviceForm(configuration: {
-    initialValues: DeviceInfo;
-    onSubmit: (values: DeviceInfo) => void;
-  }): FormDeviceStateHandler {
-    const form = useFormik<DeviceInfo>({
+function phoneNumberForm(configuration: {
+    initialValues: PhoneNumber;
+    onSubmit: (values: PhoneNumber) => void;
+  }): FormPhoneStateHandler {
+    const form = useFormik<PhoneNumber>({
       ...configuration,
       enableReinitialize: true,
     });
   
-    const onDeviceIdChange = (event: ChangeEvent<HTMLInputElement>) => {
-      form.setFieldValue('id', event.target.value);
-    };
-    const onCertificateChange = (event: ChangeEvent<HTMLInputElement>) => {
-      form.setFieldValue('certificateId', event.target.value);
+    const onNumberChange = (event: ChangeEvent<HTMLInputElement>) => {
+      form.setFieldValue('number', event.target.value);
     };
   
     return {
-      id: form.values.id,
-      certificateId: form.values.certificateId,
+      number: form.values.number,
       handleSubmit: form.handleSubmit,
-      onCertificateChange,
-      onDeviceIdChange,
+      onNumberChange,
     };
   }
 
@@ -54,23 +55,20 @@ function Dashboard() {
     const [loading, setLoading] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
 
-    const form = deviceForm({
-        initialValues: { id: '', certificateId: '' },
+    const form = phoneNumberForm({
+        initialValues: { number: '' },
         onSubmit: async (values) => {
           try {
-            setLoading(true);
-            const { certificateId, id  } = await dataProvider.addDevice(values, value.name );
+            // setLoading(true);
+            // const { number  } = await dataProvider.addPhoneNumber(values, value.name );
 
-            const device: DeviceInfo = {
-              id,
-              certificateId
-            }
-            const userData: User = {
-              ...value
-            }
-            userData.devices.push(device);
+            // const userData: User = {
+            //   ...value
+            // }
+            // userData.phoneNumber.push(number);
 
-            setContext(userData);
+            // setContext(userData);
+
             closePopup()
 
           } catch (error) {
@@ -101,6 +99,7 @@ function Dashboard() {
         </Header>
         <Section>
             <Text>
+              <CreditCard/>
                 <h4>Credit card number</h4>
             </Text>
             <Action>
@@ -108,15 +107,17 @@ function Dashboard() {
             </Action>
         </Section>
         <Section>
-            <Balance>
-                <h4>Total Balance</h4>
-                <h1>€{value.balance}</h1>
-            </Balance>
-            <Actions>
-                <StyledButton theme={ {color:"#1F2A3F", width:"170px", height:"45px", font:"0.9rem" }} text="New Payment" submit={false} loading={false} />
-                <StyledButton theme={ {color:"#1F2A3F", width:"170px", height:"45px", font:"0.9rem" }} text="Make Transfer" submit={false} loading={false} />
+            <Text>
+              <Phone/>
+                <h4>Phone number</h4>
+            </Text>
+            <Action>
+              <h4>+3811234567</h4>
+                <IconButton text={"Add number"} icon={AddIcon} onClick={closePopup}/>
                 {showPopup ?
                     <Popup
+                        body={PhoneNumberForm}
+                        header={"Add thrusted phone number"}
                         form={form}
                         closePopup={closePopup}
                         onClickClose={closeOnOutOfFocuse}
@@ -124,10 +125,20 @@ function Dashboard() {
                     />
                     : null
                 }
+            </Action>
+        </Section>
+        <Section>
+            <Balance>
+              <MoneBag/>
+                <h4>Total Balance</h4>
+                <h1>€{value.balance}</h1>
+            </Balance>
+            <Actions>
+                <StyledButton theme={ {color:"#1F2A3F", width:"170px", height:"45px", font:"0.9rem" }} text="New Payment" submit={false} loading={false} />
+                <StyledButton theme={ {color:"#1F2A3F", width:"170px", height:"45px", font:"0.9rem" }} text="Make Transfer" submit={false} loading={false} />
             </Actions>
         </Section>
-        <Table title="All Accounts" columns={dataProvider.tableData.column} rows={dataProvider.tableData.row} button={false} onClick={closePopup}/>
-        <Table title="Trusted IoT Devices" columns={dataProvider.deviceData.column} rows={dataProvider.deviceData.row} button={true} onClick={closePopup}/>
+        <Table title="All Accounts" columns={dataProvider.tableData.column} rows={dataProvider.tableData.row}/>
         <DetailsSection>
             <ActivityTable data={dataProvider.recentActivitydata}/>
             <ExpensesReport>

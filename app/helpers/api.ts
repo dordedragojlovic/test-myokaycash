@@ -136,28 +136,26 @@ async function getUser(
   ).data.account;
 }
 
-async function addDevice(
-  deviceInfo, username
-): Promise<{ id: string; certificateId: string; }> {
+async function addPhoneNumber(
+  number, username
+): Promise<{ number: string; }> {
   return (
     await client.mutate({
       mutation: gql`
-        mutation addDevice ($input: AddDeviceInput! ){
-          addDevice(input: $input){
-            id
-            certificateId
+        mutation addPhoneNumber ($input: AddPhoneInput! ){
+          addPhoneNumber(input: $input){
+            number
           }
         }
       `,
       variables: {
         input: {
-          id: deviceInfo.id,
-          certificateId: deviceInfo.certificateId,
+          number: number,
           username: username
         }
       },
     })
-  ).data.addDevice;
+  ).data.addPhoneNumber;
 }
 
 const API = {
@@ -166,7 +164,7 @@ const API = {
   getLinkingObservable,
   getValidityObservable,
   cleareDB,
-  addDevice,
+  addPhoneNumber,
   getUser
 };
 

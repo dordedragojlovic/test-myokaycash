@@ -11,30 +11,31 @@ export const Text = styled.div`
   display: flex;
   justify-content: end;
   align-items: baseline;
-  width: 12%;
+  width: 16%;
 
   ${responsive.sm} {
-    width: 31%;
+    width: 46%;
   }
   ${responsive.md} {
-    width: 27%;
+    width: 30%;
   }
   ${responsive.mdpi} {
-      width: 20%;
+      width: 30%;
   }
   ${responsive.mac} {
-      width: 16%;
+      width: 24%;
   }
   ${responsive.lg} {
-      width: 13%;
+      width: 20%;
   }
   ${responsive.iPadPro} {
-    width: 15%;
+    width: 31%;
   }
 
   h4{
     color: #66C664;
-    font-weight: 400; 
+    font-weight: 400;
+    margin-left: 15px;
   }
 
 `;
@@ -42,12 +43,13 @@ export const Text = styled.div`
 export const Balance = styled.div`
   display: flex;
   justify-content: end;
-  align-items: baseline;
+  align-items: center;
 
   h4{
     color: #66C664;
     margin-right: 30px;
-    font-weight: 400; 
+    font-weight: 400;
+    margin-left: 15px; 
   }
 
   ${responsive.sm} {
@@ -106,7 +108,7 @@ export const Actions = styled.div`
       width: 32%;
   }
   ${responsive.iPadPro} {
-    width: 53%;
+    width: 43%;
   }
 `;
 
