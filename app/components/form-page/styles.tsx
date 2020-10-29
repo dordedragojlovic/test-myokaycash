@@ -19,6 +19,7 @@ export const Section = styled.div`
 
     ${responsive.sm} {
         flex-direction: column;
+        align-items: center;
     }
 
     ${responsive.iPadPro} {
@@ -27,7 +28,7 @@ export const Section = styled.div`
 `;
 
 export const TextContainer = styled.div`
-    width: 40%;
+    width: 44%;
     h1{
         font-style: normal;
         font-weight: 900;
@@ -56,7 +57,7 @@ export const TextContainer = styled.div`
     }
 
     ${responsive.sm} {
-        width: 100%;
+        width: 74%;
         margin-bottom: 120px;
     }
 
@@ -114,6 +115,9 @@ export const InputContainer = styled.div`
 
     ${responsive.sm} {
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     ${responsive.iPadPro} {

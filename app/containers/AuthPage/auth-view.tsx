@@ -1,16 +1,16 @@
-import { FormStateHandler } from 'types';
+import { FormAuthStateHandler } from 'types';
 import React from 'react';
-import FormPage from 'components/form-page';
 import Warning from 'components/warning';
-import UserForm from 'components/form-page/user-form';
+import FormPage from 'components/form-page';
+import AuthForm from 'components/form-page/auth-form';
 
-function HomePageView({
+function AuthPageView({
   form,
   loading,
   closeWarning,
   errorMessage,
 }: {
-  form: FormStateHandler;
+  form: FormAuthStateHandler;
   loading: boolean;
   closeWarning;
   errorMessage: string;
@@ -22,14 +22,14 @@ function HomePageView({
       )}
       <FormPage
         form={form}
-        text="Create your account on"
-        textSmall={"Enter you credentials to create your account"}
-        buttonText="ACTIVATE"
+        text="Confirm your payment with"
+        textSmall={"Enter secret code to finish your transaction"}
+        buttonText="CONFIRM"
         loading={loading}
-        body={UserForm}
+        body={AuthForm}
       />
     </>
   );
 }
 
-export default HomePageView;
+export default AuthPageView;

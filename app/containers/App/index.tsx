@@ -7,6 +7,7 @@ import HomePage from 'containers/HomePage/Loadable';
 import LinkingSuccess from 'containers/LinkingSuccessPage';
 import LoginPage from 'containers/LoginPage'
 import Dashboard from 'containers/Dashboard';
+import AuthPage from 'containers/AuthPage';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import NavBar from 'components/nav-bar';
 import PageWrapper from 'components/page-wrapper';
@@ -28,6 +29,7 @@ function App() {
                   <Route exact path="/linking-success" component={LinkingSuccess} />
                   <Route exact path="/login" component={LoginPage} />
                   <Route exact path="/dashboard" component={Dashboard} />
+                  <Route exact path="/auth" component={AuthPage} />
                   <Route component={NotFoundPage} />
                 </Switch>
             </PageWrapper>

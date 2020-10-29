@@ -42,9 +42,19 @@ export type FormPhoneStateHandler = {
   onNumberChange: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
+export type FormAuthStateHandler = {
+  code: string;
+  handleSubmit: () => void;
+  onSecretCodeChange: (event: ChangeEvent<HTMLInputElement>) => void;
+};
+
 export interface LoginInfo {
   username: string;
   password: string;
+};
+
+export interface AuthInfo {
+  code: string;
 };
 
 export interface PhoneNumber {

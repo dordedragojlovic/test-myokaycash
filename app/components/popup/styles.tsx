@@ -113,6 +113,7 @@ export const InputContainer = styled.div`
 
   ${responsive.sm} {
     width: 100%;
+    align-items: center;
   }
 
   ${responsive.iPadPro} {

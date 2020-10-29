@@ -5,32 +5,20 @@ import StyledButton from 'components/button'
 
 
 
-function FormPage({ form, text, buttonText, loading }: { form: FormStateHandler, text: string, buttonText: string, loading: boolean }) {
+function FormPage({ form, text, textSmall, buttonText, loading, body }: { form, text: string, textSmall: string, buttonText: string, loading: boolean, body }) {
+
+    let Body = body;
 
   return (
     <form onSubmit={form.handleSubmit}>
         <PageContainer>
             <Section>
                 <TextContainer>
-                <h1>{text} your account on My<span>OKAY</span>Cash</h1>
-                <h5>Enter you credentials to <span>{text}</span>  your account</h5>
+                <h1>{text} My<span>OKAY</span>Cash</h1>
+                <h5>{textSmall}</h5>
                 </TextContainer>
                 <InputContainer>
-                    <div>
-                        <h3>Name</h3>
-                        <input
-                            value={form.username}
-                            onChange={form.onUsernameChange}
-                        />
-                    </div>
-                    <div>
-                        <h3>Password</h3>
-                        <input
-                            type="password"
-                            value={form.password}
-                            onChange={form.onPasswordChange}
-                        />
-                    </div>
+                    <Body form={form}/>
                 </InputContainer>
             </Section>
             <StyledButton theme={ {color:"#66C664", width:"233px", height:"68px", font:"25px" }} text={buttonText} submit={true} loading={loading}/>
