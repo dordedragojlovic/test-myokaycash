@@ -26,14 +26,16 @@ async function createUser(
   return (
     await client.mutate({
       mutation: gql`
-        mutation createAccount ($input: UserLogin! ){
-          createAccount(input: $input){
-            code
-            qrCode
-            cardInfo{
-              number
-              cvc
-              validity
+        mutation account ($input: UserLogin! ){
+          account{
+            create(input: $input){
+              code
+              qrCode
+              cardInfo{
+                number
+                cvc
+                validity
+              }
             }
           }
         }
@@ -45,7 +47,64 @@ async function createUser(
         }
       },
     })
-  ).data.createAccount;
+  ).data.account.create;
+}
+
+async function updateUser(
+  values
+): Promise<{ cardInfo: { number: string; cvc: string; validity: string}; balance: string; currency: string; phoneNumber: string; }> {
+  return (
+    await client.mutate({
+      mutation: gql`
+      mutation account ($input: UpdateAccountInput! ){
+        account{
+          update(input: $input){
+            cardInfo{
+              number
+              cvc
+              validity
+            }
+            balance
+            currency
+            phoneNumber
+          }
+        }
+      }
+      `,
+      variables: {
+        input: {
+          username: values.username,
+          phoneNumber: values.phoneNumber
+        }
+      },
+    })
+  ).data.account.update;
+}
+
+async function getUser(
+  values
+): Promise<{ cardInfo: { number: string; cvc: string; validity: string}; username: string; balance: number; phoneNumber: string; }> {
+  return (
+    await client.query({
+      query: gql`
+        query account ($username: String! ){
+          account(username: $username){
+            cardInfo{
+              number
+              cvc
+              validity
+            }
+            username
+            balance
+            phoneNumber
+          }
+        }
+      `,
+      variables: {
+          username: values
+      },
+    })
+  ).data.account;
 }
 
 async function login(
@@ -54,11 +113,13 @@ async function login(
   return (
     await client.mutate({
       mutation: gql`
-        mutation logIn ($input: UserLogin! ){
+      mutation account ($input: UserLogin! ){
+        account{
           logIn(input: $input){
             code
           }
         }
+      }
       `,
       variables: {
         input: {
@@ -67,7 +128,31 @@ async function login(
         }
       },
     })
-  ).data.logIn;
+  ).data.account.logIn;
+}
+
+async function VoIPVerify(
+  values
+): Promise<{ id: string; confirmed: boolean; }> {
+  return (
+    await client.mutate({
+      mutation: gql`
+        mutation payment ($input: VerifyTransactionInput! ){
+          payment{
+            verify(input: $input){
+              id
+              confirmed
+            }
+          }
+        }
+      `,
+      variables: {
+        input: {
+          code: values.code
+        }
+      },
+    })
+  ).data.payment.verify;
 }
 
 async function cleareDB(): Promise<{ reset: boolean }> {
@@ -107,64 +192,14 @@ function getValidityObservable(name: string): Observable<boolean> {
   return Observable.from(fetchResultObservable).map((value) => value.data?.userLoginConfirmSuccessful);
 }
 
-async function getUser(
-  values
-): Promise<{ cardInfo: { number: string; cvc: string; validity: string}; username: string; balance: number; devices: [{ id:string; certificateId: string}] }> {
-  return (
-    await client.query({
-      query: gql`
-        query account ($username: String! ){
-          account(username: $username){
-            cardInfo{
-              number
-              cvc
-              validity
-            }
-            username
-            balance
-            devices{
-              id
-              certificateId
-            }
-          }
-        }
-      `,
-      variables: {
-          username: values
-      },
-    })
-  ).data.account;
-}
-
-async function addPhoneNumber(
-  number, username
-): Promise<{ number: string; }> {
-  return (
-    await client.mutate({
-      mutation: gql`
-        mutation addPhoneNumber ($input: AddPhoneInput! ){
-          addPhoneNumber(input: $input){
-            number
-          }
-        }
-      `,
-      variables: {
-        input: {
-          number: number,
-          username: username
-        }
-      },
-    })
-  ).data.addPhoneNumber;
-}
-
 const API = {
   createUser,
+  updateUser,
   login,
+  VoIPVerify,
   getLinkingObservable,
   getValidityObservable,
   cleareDB,
-  addPhoneNumber,
   getUser
 };
 

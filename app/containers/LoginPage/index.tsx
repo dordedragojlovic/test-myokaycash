@@ -48,7 +48,7 @@ function LoginPage() {
   
   const getUserData = async ( username ) =>{
     try {
-      const { cardInfo, balance } = await dataProvider.getUser(username);
+      const { cardInfo, balance, phoneNumber } = await dataProvider.getUser(username);
 
       const userData: User = {
         ...value
@@ -57,6 +57,7 @@ function LoginPage() {
       userData.cardInfo = cardInfo;
       userData.balance = balance;
       userData.name = username;
+      userData.phoneNumber = phoneNumber;
   
       setContext(userData);
       

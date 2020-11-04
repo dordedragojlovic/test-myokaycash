@@ -37,7 +37,7 @@ export type FormStateHandler = {
 };
 
 export type FormPhoneStateHandler = {
-  number: string;
+  phoneNumber: string;
   handleSubmit: () => void;
   onNumberChange: (event: ChangeEvent<HTMLInputElement>) => void;
 };
@@ -53,12 +53,14 @@ export interface LoginInfo {
   password: string;
 };
 
-export interface AuthInfo {
-  code: string;
+export interface UpdateInfo {
+  username: string;
+  phoneNumber: string;
 };
 
-export interface PhoneNumber {
-  number: string;
+export interface AuthInfo {
+  id: string;
+  code: string;
 };
 
 export interface User {

@@ -49,6 +49,7 @@ export const TextContainer = styled.div`
         line-height: 23px;
         color: #66C664;
         margin: 10px 0 0 0;
+        width: 70%;
 
         span{
             text-transform: lowercase;

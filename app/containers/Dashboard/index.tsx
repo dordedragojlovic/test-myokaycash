@@ -11,7 +11,7 @@ import ActivityTable from 'components/activity-table';
 import StyledButton from 'components/button';
 import IconButton from 'components/icon-button';
 import { useFormik } from 'formik';
-import { User, PhoneNumber, FormPhoneStateHandler } from 'types';
+import { User, UpdateInfo, FormPhoneStateHandler } from 'types';
 import {
     PageContainer,
     Header,
@@ -30,20 +30,20 @@ import Popup from 'components/popup';
 import PhoneNumberForm from 'components/popup/phoneNumber';
 
 function phoneNumberForm(configuration: {
-    initialValues: PhoneNumber;
-    onSubmit: (values: PhoneNumber) => void;
+    initialValues: UpdateInfo;
+    onSubmit: (values: UpdateInfo) => void;
   }): FormPhoneStateHandler {
-    const form = useFormik<PhoneNumber>({
+    const form = useFormik<UpdateInfo>({
       ...configuration,
       enableReinitialize: true,
     });
   
     const onNumberChange = (event: ChangeEvent<HTMLInputElement>) => {
-      form.setFieldValue('number', event.target.value);
+      form.setFieldValue('phoneNumber', event.target.value);
     };
   
     return {
-      number: form.values.number,
+      phoneNumber: form.values.phoneNumber,
       handleSubmit: form.handleSubmit,
       onNumberChange,
     };
@@ -56,18 +56,20 @@ function Dashboard() {
     const [showPopup, setShowPopup] = useState(false);
 
     const form = phoneNumberForm({
-        initialValues: { number: '' },
+        initialValues: { username: value.name, phoneNumber: '' },
         onSubmit: async (values) => {
           try {
-            // setLoading(true);
-            // const { number  } = await dataProvider.addPhoneNumber(values, value.name );
+            setLoading(true);
+            const { cardInfo, balance, currency, phoneNumber  } = await dataProvider.updateUser(
+              values
+            );
 
-            // const userData: User = {
-            //   ...value
-            // }
-            // userData.phoneNumber.push(number);
+            const userData: User = {
+              ...value
+            }
+            userData.phoneNumber = phoneNumber;
 
-            // setContext(userData);
+            setContext(userData);
 
             closePopup()
 
@@ -112,7 +114,7 @@ function Dashboard() {
                 <h4>Phone number</h4>
             </Text>
             <Action>
-              <h4>+3811234567</h4>
+                <h4>{value.phoneNumber}</h4>
                 <IconButton text={"Add number"} icon={AddIcon} onClick={closePopup}/>
                 {showPopup ?
                     <Popup

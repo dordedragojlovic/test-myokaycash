@@ -1,9 +1,8 @@
-import { PhoneNumber } from 'types';
+import { UpdateInfo } from 'types';
 import API from 'helpers/api';
-import { Observable } from 'apollo-link';
 
-function addPhoneNumber(number: PhoneNumber, username: string): Promise<{ number: string; }> {
-  return API.addPhoneNumber(number, username);
+function updateUser(values: UpdateInfo): Promise<{ cardInfo: { number: string; cvc: string; validity: string}; balance: string; currency: string; phoneNumber: string; }> {
+  return API.updateUser(values);
 }
 
 const recentActivitydata = [
@@ -54,7 +53,7 @@ const tableData = {
 }
 
 const dataProvider = {
-  addPhoneNumber,
+  updateUser,
   recentActivitydata,
   tableData
 };

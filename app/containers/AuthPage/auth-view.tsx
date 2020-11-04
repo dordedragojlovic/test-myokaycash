@@ -23,7 +23,7 @@ function AuthPageView({
       <FormPage
         form={form}
         text="Confirm your payment with"
-        textSmall={"Enter secret code to finish your transaction"}
+        textSmall={"Enter secret code you received over call to finish your transaction."}
         buttonText="CONFIRM"
         loading={loading}
         body={AuthForm}

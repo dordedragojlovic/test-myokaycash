@@ -10,7 +10,7 @@ function userValid(name: string): Observable<boolean> {
   return API.getValidityObservable(name);
 }
 
-function getUser(username: string): Promise<{ cardInfo: { number: string; cvc: string; validity: string}; username: string; balance: number; devices: [{ id:string; certificateId: string}]}> {
+function getUser(username: string): Promise<{ cardInfo: { number: string; cvc: string; validity: string}; username: string; balance: number; phoneNumber: string }> {
   return API.getUser(username);
 }
 

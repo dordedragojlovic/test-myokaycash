@@ -4,6 +4,7 @@ import { AuthInfo } from 'types';
 import { FormAuthStateHandler } from 'types';
 import onError from 'components/warning/on-error';
 import AuthPageView from './auth-view';
+import dataProvider from './data-provider';
 
 function authForm(configuration: {
   initialValues: AuthInfo;
@@ -34,13 +35,16 @@ function AuthPage() {
   }
 
   const form = authForm({
-    initialValues: { code: '' },
+    initialValues: { id: '1', code: '' },
     onSubmit: async values => {
       try {
         setLoading(true);
-        // const { code } = await dataProvider.authVoIP(
-        //   values,
-        // );
+        const { confirmed } = await dataProvider.authVoIP(
+          values,
+        );
+        if( !!confirmed ){
+            onError('Payment confirmed!', setError, setLoading);
+        }
       } catch (error) {
         onError(error.message, setError, setLoading);
       }
