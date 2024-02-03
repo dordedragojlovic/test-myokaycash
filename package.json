@@ -59,7 +59,7 @@
     "reselect": "4.0.0",
     "sanitize.css": "11.0.0",
     "styled-components": "4.3.2",
-    "subscriptions-transport-ws": "0.9.16",
+    "subscriptions-transport-ws": "0.11.0",
     "typesafe-actions": "5.1.0"
   },
   "devDependencies": {
